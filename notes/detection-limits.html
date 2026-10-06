@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three detection limits for one instrument — Oliver Lee</title>
+<meta name="description" content="Currie’s critical level and detection limit, the EPA method detection limit (40 CFR 136 Appendix B, Revision 2), and the calibration-curve MDL in SEMI C10: what each answers and why they disagree.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://oliverlee.me/notes/detection-limits.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Three detection limits for one instrument">
+<meta property="og:description" content="Currie, the EPA MDL and SEMI C10: what each detection limit answers and why they disagree.">
+<meta property="og:url" content="https://oliverlee.me/notes/detection-limits.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Three detection limits for one instrument</h1>
+    <p class="dek">A customer asks for your detection limit for iron in sulfuric acid. The honest first answer is “which one?”</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <p>The same ICP-MS, the same blanks and the same calibration standards can produce noticeably different “detection limits” depending on which definition you apply. That is not sloppiness; the definitions answer different questions. Lloyd Currie made the point bluntly in 1968: applying eight common textbook definitions to a single radioactivity measurement gave limits spread over a factor of nearly 1000.</p>
+
+    <p>This note walks through the three definitions I meet most often in semiconductor materials work: Currie’s framework, the EPA method detection limit, and the calibration-curve approach in SEMI C10.</p>
+
+    <h2>1. Currie: two questions, two errors</h2>
+
+    <p>Currie separated two questions that are easy to blur together:</p>
+    <ul>
+      <li><b>Decision:</b> given this measurement, do I say the analyte is present? The threshold is the <b>critical level, L<sub>C</sub></b>. Setting it trades off the false-positive rate α.</li>
+      <li><b>Capability:</b> how much analyte must truly be there before I will reliably detect it? That is the <b>detection limit, L<sub>D</sub></b>, which also limits the false-negative rate β.</li>
+    </ul>
+    <p>He added a third level for quantitation, the <b>determination limit, L<sub>Q</sub></b>, the level at which the relative standard deviation falls to a stated value; with his k<sub>Q</sub> = 10 that is 10% RSD.</p>
+
+    <p>With α = β = 0.05, a known and constant standard deviation σ<sub>0</sub> of the net blank signal, and a normal distribution, the levels reduce to simple multiples:</p>
+    <div class="eq">L<sub>C</sub> = 1.645 σ<sub>0</sub> &nbsp;&nbsp; L<sub>D</sub> = 3.29 σ<sub>0</sub> &nbsp;&nbsp; L<sub>Q</sub> = 10 σ<sub>0</sub></div>
+
+    <figure>
+      <svg viewBox="0 0 640 230" role="img" aria-labelledby="fig1-t fig1-d">
+        <title id="fig1-t">Critical level and detection limit</title>
+        <desc id="fig1-d">Two normal distributions: the blank centred at zero and a true signal centred at the detection limit. The critical level sits between them; the blank's tail above it is the false-positive area alpha, and the signal's tail below it is the false-negative area beta.</desc>
+        <line class="dg-axis" x1="40" y1="180" x2="600" y2="180"/>
+        <path class="dg-alpha" d="M303.4,180L303.4,141.3L305.7,144.3L307.9,147.1L310.1,149.7L312.3,152.2L314.5,154.6L316.8,156.8L319.0,158.9L321.2,160.8L323.4,162.6L325.6,164.2L327.9,165.7L330.1,167.2L332.3,168.5L334.5,169.6L336.7,170.7L339.0,171.7L341.2,172.6L343.4,173.5L345.6,174.2L347.8,174.9L350.1,175.5L352.3,176.0L354.5,176.5L356.7,176.9L358.9,177.3L361.2,177.6L363.4,178.0L365.6,178.2L367.8,178.5L370.1,178.7L372.3,178.8L374.5,179.0L376.7,179.1L378.9,179.3L381.2,179.4L383.4,179.5L385.6,179.5L387.8,179.6L390.0,179.7L392.3,179.7L394.5,179.8L396.7,179.8L398.9,179.8L401.1,179.9L403.4,179.9L405.6,179.9L407.8,179.9L410.0,179.9L412.2,179.9L414.5,180.0L416.7,180.0L418.9,180.0L421.1,180.0L423.3,180.0L425.6,180.0L427.8,180.0L430.0,180.0L432.2,180.0L434.4,180.0L436.7,180.0L436.7,180Z"/>
+        <path class="dg-beta" d="M156.7,180L156.7,180.0L159.1,180.0L161.6,180.0L164.0,180.0L166.5,180.0L168.9,180.0L171.3,180.0L173.8,180.0L176.2,180.0L178.7,180.0L181.1,180.0L183.6,180.0L186.0,180.0L188.5,180.0L190.9,180.0L193.4,180.0L195.8,179.9L198.3,179.9L200.7,179.9L203.1,179.9L205.6,179.9L208.0,179.8L210.5,179.8L212.9,179.8L215.4,179.7L217.8,179.6L220.3,179.6L222.7,179.5L225.2,179.4L227.6,179.3L230.0,179.2L232.5,179.0L234.9,178.8L237.4,178.6L239.8,178.4L242.3,178.1L244.7,177.8L247.2,177.4L249.6,177.0L252.1,176.5L254.5,176.0L257.0,175.4L259.4,174.8L261.8,174.0L264.3,173.2L266.7,172.2L269.2,171.2L271.6,170.0L274.1,168.7L276.5,167.3L279.0,165.8L281.4,164.1L283.9,162.2L286.3,160.2L288.8,158.1L291.2,155.7L293.6,153.2L296.1,150.5L298.5,147.6L301.0,144.6L303.4,141.3L303.4,180Z"/>
+        <path class="dg-blank" d="M40.0,179.9 L44.7,179.9 L49.3,179.9 L54.0,179.8 L58.7,179.8 L63.3,179.7 L68.0,179.5 L72.7,179.4 L77.3,179.1 L82.0,178.8 L86.7,178.3 L91.3,177.8 L96.0,177.0 L100.7,176.1 L105.3,174.9 L110.0,173.4 L114.7,171.6 L119.3,169.4 L124.0,166.7 L128.7,163.5 L133.3,159.8 L138.0,155.4 L142.7,150.4 L147.3,144.7 L152.0,138.4 L156.7,131.4 L161.3,123.9 L166.0,115.7 L170.7,107.2 L175.3,98.3 L180.0,89.3 L184.7,80.2 L189.3,71.4 L194.0,62.9 L198.7,55.0 L203.3,48.0 L208.0,41.9 L212.7,37.0 L217.3,33.4 L222.0,31.1 L226.7,30.4 L231.3,31.1 L236.0,33.4 L240.7,37.0 L245.3,41.9 L250.0,48.0 L254.7,55.0 L259.3,62.9 L264.0,71.4 L268.7,80.2 L273.3,89.3 L278.0,98.3 L282.7,107.2 L287.3,115.7 L292.0,123.9 L296.7,131.4 L301.3,138.4 L306.0,144.7 L310.7,150.4 L315.3,155.4 L320.0,159.8 L324.7,163.5 L329.3,166.7 L334.0,169.4 L338.7,171.6 L343.3,173.4 L348.0,174.9 L352.7,176.1 L357.3,177.0 L362.0,177.8 L366.7,178.3 L371.3,178.8 L376.0,179.1 L380.7,179.4 L385.3,179.5 L390.0,179.7 L394.7,179.8 L399.3,179.8 L404.0,179.9 L408.7,179.9 L413.3,179.9 L418.0,180.0 L422.7,180.0 L427.3,180.0 L432.0,180.0 L436.7,180.0 L441.3,180.0 L446.0,180.0 L450.7,180.0 L455.3,180.0 L460.0,180.0 L464.7,180.0 L469.3,180.0 L474.0,180.0 L478.7,180.0 L483.3,180.0 L488.0,180.0 L492.7,180.0 L497.3,180.0 L502.0,180.0 L506.7,180.0 L511.3,180.0 L516.0,180.0 L520.7,180.0 L525.3,180.0 L530.0,180.0 L534.7,180.0 L539.3,180.0 L544.0,180.0 L548.7,180.0 L553.3,180.0 L558.0,180.0 L562.7,180.0 L567.3,180.0 L572.0,180.0 L576.7,180.0 L581.3,180.0 L586.0,180.0 L590.7,180.0 L595.3,180.0 L600.0,180.0"/>
+        <path class="dg-signal" d="M40.0,180.0 L44.7,180.0 L49.3,180.0 L54.0,180.0 L58.7,180.0 L63.3,180.0 L68.0,180.0 L72.7,180.0 L77.3,180.0 L82.0,180.0 L86.7,180.0 L91.3,180.0 L96.0,180.0 L100.7,180.0 L105.3,180.0 L110.0,180.0 L114.7,180.0 L119.3,180.0 L124.0,180.0 L128.7,180.0 L133.3,180.0 L138.0,180.0 L142.7,180.0 L147.3,180.0 L152.0,180.0 L156.7,180.0 L161.3,180.0 L166.0,180.0 L170.7,180.0 L175.3,180.0 L180.0,180.0 L184.7,180.0 L189.3,180.0 L194.0,179.9 L198.7,179.9 L203.3,179.9 L208.0,179.8 L212.7,179.8 L217.3,179.7 L222.0,179.5 L226.7,179.3 L231.3,179.1 L236.0,178.7 L240.7,178.3 L245.3,177.7 L250.0,176.9 L254.7,176.0 L259.3,174.8 L264.0,173.3 L268.7,171.4 L273.3,169.1 L278.0,166.4 L282.7,163.2 L287.3,159.3 L292.0,154.9 L296.7,149.9 L301.3,144.1 L306.0,137.7 L310.7,130.7 L315.3,123.1 L320.0,114.9 L324.7,106.3 L329.3,97.4 L334.0,88.4 L338.7,79.3 L343.3,70.5 L348.0,62.1 L352.7,54.3 L357.3,47.3 L362.0,41.4 L366.7,36.6 L371.3,33.1 L376.0,31.0 L380.7,30.4 L385.3,31.3 L390.0,33.7 L394.7,37.4 L399.3,42.5 L404.0,48.6 L408.7,55.8 L413.3,63.7 L418.0,72.2 L422.7,81.1 L427.3,90.2 L432.0,99.2 L436.7,108.1 L441.3,116.6 L446.0,124.6 L450.7,132.2 L455.3,139.1 L460.0,145.3 L464.7,150.9 L469.3,155.9 L474.0,160.2 L478.7,163.8 L483.3,167.0 L488.0,169.6 L492.7,171.8 L497.3,173.6 L502.0,175.0 L506.7,176.2 L511.3,177.1 L516.0,177.8 L520.7,178.4 L525.3,178.8 L530.0,179.1 L534.7,179.4 L539.3,179.6 L544.0,179.7 L548.7,179.8 L553.3,179.8 L558.0,179.9 L562.7,179.9 L567.3,180.0 L572.0,180.0 L576.7,180.0 L581.3,180.0 L586.0,180.0 L590.7,180.0 L595.3,180.0 L600.0,180.0"/>
+        <line class="dg-mark" x1="303.4" y1="20" x2="303.4" y2="180"/>
+        <line class="dg-mark" x1="380.2" y1="20" x2="380.2" y2="180"/>
+        <line class="dg-mark" x1="226.7" y1="180" x2="226.7" y2="186" style="stroke-dasharray:none"/>
+        <text class="dg-text" x="226.7" y="202" text-anchor="middle">0</text>
+        <text class="dg-text strong" x="303.4" y="202" text-anchor="middle">L<tspan baseline-shift="sub" font-size="10">C</tspan></text>
+        <text class="dg-text strong" x="380.2" y="202" text-anchor="middle">L<tspan baseline-shift="sub" font-size="10">D</tspan></text>
+        <text class="dg-text" x="160" y="24" text-anchor="middle">Blank</text>
+        <text class="dg-text" x="450" y="24" text-anchor="middle">True signal at L<tspan baseline-shift="sub" font-size="10">D</tspan></text>
+        <text class="dg-text" x="330" y="172">α</text>
+        <text class="dg-text" x="280" y="172">β</text>
+        <text class="dg-text" x="600" y="222" text-anchor="end">Net signal</text>
+      </svg>
+      <figcaption>Above L<sub>C</sub> you call “detected” and accept a 5% false-positive risk (α). A sample truly at L<sub>D</sub> still falls below L<sub>C</sub> 5% of the time (β).</figcaption>
+    </figure>
+
+    <p>The familiar “three sigma of the blank” rule sits close to L<sub>D</sub> in this picture, but it is usually applied without saying which error rates it assumes or whether σ<sub>0</sub> is known or estimated from a handful of blanks. Those details move the answer.</p>
+
+    <h2>2. EPA method detection limit (40 CFR 136, Appendix B, Revision 2)</h2>
+
+    <p>The US EPA procedure, which grew out of work published by Glaser and co-authors in 1981, is the definition many environmental and contract labs know best. Revision 2, published in December 2016, defines the MDL as the minimum measured concentration that can be reported with 99% confidence that it is distinguishable from method-blank results.</p>
+
+    <p>The procedure in outline:</p>
+    <ul>
+      <li>Analyse at least seven spiked samples and at least seven method blanks, prepared in at least three batches on three separate dates.</li>
+      <li>Spike at typically two to ten times the estimated detection limit.</li>
+      <li>Compute the spike-based value from the replicate standard deviation S<sub>s</sub>:</li>
+    </ul>
+    <div class="eq">MDL<sub>S</sub> = t<sub>(n−1, 0.99)</sub> × S<sub>s</sub> &nbsp;&nbsp; (t = 3.143 for n = 7)</div>
+    <ul>
+      <li>Compute a blank-based value MDL<sub>b</sub>: not applicable if no blank gives a numerical result; the highest blank result if only some do; the blank mean plus t × S<sub>b</sub> if all do.</li>
+      <li>Report the larger of MDL<sub>S</sub> and MDL<sub>b</sub>, and recalculate at least once a year from data collected over up to the last 24 months.</li>
+    </ul>
+
+    <p>Two features matter for comparison. It covers the <b>whole method</b>, sample preparation included, not just the instrument. And Revision 2’s blank term means contamination in your reagents or labware now raises the reported MDL, which is exactly the effect a semiconductor customer worries about.</p>
+
+    <h2>3. SEMI C10: an MDL from the calibration curve</h2>
+
+    <p>SEMI C10, the <i>Guide for Determination of Method Detection Limits</i>, was first published in 1998; the current revision is C10-1109, reapproved in 2014. It is written for trace contaminants in process chemicals and gases and determines the MDL from a regression analysis of a calibration curve rather than from replicate spikes at one level.</p>
+
+    <p>Published discussions of the guide describe the idea as follows: fit the calibration line, build the prediction interval for a future measurement at zero concentration, and convert the upper limit of that interval back into a concentration (inverse prediction). C10 recommends weighted least squares, so that points with larger scatter at higher concentrations count for less.</p>
+
+    <div class="callout">
+      <p><b>Watch the weights.</b> A worked example from JMP compared this weighted approach with ordinary least squares on the same data. Because the scatter at zero concentration was far smaller than elsewhere, the inverse-variance weights let the zero level dominate and the weighted estimate came out at 0.0014 against 9.6 from the unweighted fit. Before trusting a weighted MDL, plot the residuals and check that the variance model is reasonable at the low end.</p>
+    </div>
+
+    <p>I have summarised C10 from SEMI’s published abstract and from secondary discussions; the standard itself sets out the exact calculation and should be followed for any reported value.</p>
+
+    <h2>4. Side by side</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Definition</th><th scope="col">Question it answers</th><th scope="col">Data it needs</th><th scope="col">What it captures</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Currie L<sub>C</sub> / L<sub>D</sub></td><td>When do I call it detected; what can I reliably detect?</td><td>Blank (net signal) distribution; chosen α and β</td><td>The statistical logic; the basis for the others</td></tr>
+          <tr><td>EPA MDL, Rev. 2</td><td>What is the lowest result I can report as different from blanks, with 99% confidence?</td><td>≥ 7 spikes and ≥ 7 blanks over ≥ 3 batches and dates</td><td>Whole method including prep and blank contamination, over time</td></tr>
+          <tr><td>SEMI C10</td><td>What concentration is distinguishable from zero, given this calibration?</td><td>Calibration standards with replicates</td><td>Calibration scatter; sensitive to the weighting model</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>5. What I do in practice</h2>
+    <ol>
+      <li><b>Name the definition</b> next to the number on any certificate, report or audit answer, with the matrix, isotope and preparation.</li>
+      <li><b>Match the customer’s specification.</b> If a spec cites SEMI C10, a replicate-spike MDL is not the same number, even when the lab’s SOP uses one.</li>
+      <li><b>Never compare across definitions.</b> Supplier A’s 3σ LOD and supplier B’s EPA-style MDL do not rank the two labs.</li>
+      <li><b>Keep the blanks in the estimate.</b> In ultra-trace work the blank, not the detector, usually sets the floor.</li>
+      <li><b>Recalculate on a schedule</b> and after any change to the instrument, reagents or clean-room conditions.</li>
+    </ol>
+
+    <section class="refs" aria-labelledby="refs-h">
+      <h2 id="refs-h">References</h2>
+      <ol>
+        <li>L. A. Currie, “Limits for Qualitative Detection and Quantitative Determination: Application to Radiochemistry,” <i>Analytical Chemistry</i> 40, 586–593 (1968). Commentary: <a href="https://nvlpubs.nist.gov/nistpubs/sp958-lide/html/164-166.html">NIST SP 958</a>.</li>
+        <li>US EPA, <a href="https://www.law.cornell.edu/cfr/text/40/appendix-B_to_part_136">40 CFR Part 136, Appendix B: Definition and Procedure for the Determination of the Method Detection Limit, Revision 2</a>; <a href="https://www.epa.gov/sites/default/files/2016-12/documents/mdl-procedure_rev2_12-13-2016.pdf">EPA procedure document, December 2016</a>.</li>
+        <li>SEMI, <a href="https://store-us.semi.org/products/c01000-semi-c10-guide-for-determination-of-method-detection-limits">SEMI C10, Guide for Determination of Method Detection Limits</a>.</li>
+        <li>JMP Community, <a href="https://community.jmp.com/t5/JMPer-Cable/Estimation-of-a-Limit-of-Detection/ba-p/20986">Estimation of a Limit of Detection</a>; see also <a href="https://www.mwsug.org/proceedings/2013/JM/MWSUG-2013-JM01.pdf">MWSUG 2013, paper JM01</a>.</li>
+        <li>Labcompare, <a href="https://www.labcompare.com/10-Featured-Articles/338537-Statistics-in-the-Laboratory-The-Limit-of-Detection/">Statistics in the Laboratory: The Limit of Detection</a>.</li>
+      </ol>
+    </section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+</body>
+</html>
