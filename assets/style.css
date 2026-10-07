@@ -311,12 +311,14 @@ a:hover, .posts a:hover .title { color: var(--signal); }
 .side-honors .advisor { display: block; margin-top: 6px; font-size: var(--step--1); font-weight: 400; color: var(--text); }
 
 /* ---------- Language switch (top right) ---------- */
-.topbar { position: absolute; top: 16px; right: 16px; z-index: 5; display: flex; align-items: center; gap: 10px; }
+/* Same width and side padding as .shell, so the controls line up with the right edge of the text column */
+.topbar { position: absolute; top: 16px; left: 0; right: 0; z-index: 5; max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; pointer-events: none; }
+.topbar > * { pointer-events: auto; }
 .lang { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 0.8125rem; line-height: 1; }
 .lang a { padding: 6px 11px; border-radius: 999px; text-decoration: none; color: var(--muted); }
 .lang a:hover { color: var(--text); }
 .lang a[aria-current="true"] { background: var(--plasma-soft); color: var(--text); font-weight: 600; }
-@media (min-width: 1024px) { .topbar { top: 24px; right: 24px; } }
+@media (min-width: 1024px) { .topbar { top: 28px; padding: 0 24px; } }
 
 /* Visit counter: reads like a live detector signal */
 .visits { margin: 0; display: flex; align-items: center; gap: 7px; padding: 6px 12px 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 0.8125rem; line-height: 1; color: var(--muted); }
