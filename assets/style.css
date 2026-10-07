@@ -309,3 +309,35 @@ strong, b { color: var(--text); font-weight: 600; }
 .msms .det-flash { fill: var(--signal); }
 a:hover, .posts a:hover .title { color: var(--signal); }
 .side-honors .advisor { display: block; margin-top: 6px; font-size: var(--step--1); font-weight: 400; color: var(--text); }
+
+/* ---------- Language switch (top right) ---------- */
+.topbar { position: absolute; top: 16px; right: 16px; z-index: 5; display: flex; align-items: center; gap: 10px; }
+.lang { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 0.8125rem; line-height: 1; }
+.lang a { padding: 6px 11px; border-radius: 999px; text-decoration: none; color: var(--muted); }
+.lang a:hover { color: var(--text); }
+.lang a[aria-current="true"] { background: var(--plasma-soft); color: var(--text); font-weight: 600; }
+@media (min-width: 1024px) { .topbar { top: 24px; right: 24px; } }
+
+/* Visit counter: reads like a live detector signal */
+.visits { margin: 0; display: flex; align-items: center; gap: 7px; padding: 6px 12px 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 0.8125rem; line-height: 1; color: var(--muted); }
+.visits[hidden] { display: none; }
+.visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--signal); }
+.visits-n { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.visits-l { font-size: 0.75rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .visits { animation: visits-in 600ms cubic-bezier(.2,.8,.2,1) both; }
+  .visits-dot { animation: visits-pulse 2.4s ease-in-out infinite; }
+  @keyframes visits-in { from { opacity: 0; transform: translateY(-4px); } }
+  @keyframes visits-pulse { 50% { opacity: .35; box-shadow: 0 0 2px var(--signal); } }
+}
+@media (max-width: 380px) { .visits-l { display: none; } }
+
+/* ---------- Korean page ---------- */
+html[lang="ko"] { --serif: "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans CJK KR", "Malgun Gothic", system-ui, sans-serif; }
+html[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+html[lang="ko"] .motto { font-family: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif; }
+html[lang="ko"] .name { letter-spacing: 0.02em; }
+html[lang="ko"] .name .latin { font-family: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--text); letter-spacing: -0.01em; }
+html[lang="ko"] .lede { max-width: 30em; }
+html[lang="ko"] .msms .ion.note { font-style: normal; }
+.tag-en { display: inline-block; margin-left: 8px; padding: 2px 6px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.6875rem; font-weight: 500; vertical-align: 2px; color: var(--muted); }
