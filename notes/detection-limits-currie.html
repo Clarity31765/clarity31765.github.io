@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detection limits, part 1: Currie and the three limits — Oliver Lee</title>
+<meta name="description" content="Lloyd Currie’s 1968 critical level, detection limit and determination limit: what each means and how L_D = 3.29σ₀ follows.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/detection-limits-currie.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Detection limits, part 1: Currie and the three limits">
+<meta property="og:description" content="Lloyd Currie’s 1968 critical level, detection limit and determination limit: what each means and how L_D = 3.29σ₀ follows.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/detection-limits-currie.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Detection limits, part 1: Currie and the three limits</h1>
+    <p class="dek">Where the modern idea of a detection limit comes from, and why “detected” and “detectable” are not the same thing.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+    <nav class="series" aria-label="Detection limits series"><span class="series-l">Series</span><ol><li><span aria-current="page">Part 1 · Currie</span></li><li><a href="detection-limits-epa.html">Part 2 · EPA MDL</a></li><li><a href="detection-limits-semi-c10.html">Part 3 · SEMI C10</a></li></ol></nav>
+
+    <h2>Why start here</h2>
+    <p>Almost every certificate of analysis in trace analysis reports a "detection limit" or "MDL". Most of the definitions in use today, in standards, regulations and instrument software, trace back to one paper.</p>
+    <p><strong>Citation:</strong> L. A. Currie, "Limits for Qualitative Detection and Quantitative Determination: Application to Radiochemistry", <em>Analytical Chemistry</em>, 1968, 40, 586–593.</p>
+    <div class="callout">
+    <p><strong>Note on the name:</strong> the author is <strong>Lloyd A. Currie</strong> (with <em>-ie</em>). The name is often misspelled as "Curry".</p>
+    </div>
+    <h2>The problem in 1968</h2>
+    <p>Currie did not invent the detection limit. Detection limits were already widely used, but there was no agreement on them:</p>
+    <ul>
+    <li>The literature used many different formulas and terms.</li>
+    <li>The same words were used for two different questions: "can we see it?" and "can we measure it?".</li>
+    <li>Some common recipes had no sound statistical basis.</li>
+    </ul>
+    <p>To show how bad this was, Currie applied eight common recipes to a single counting example. The answers differed by a factor of nearly <strong>1000</strong>.</p>
+    <h2>What he proposed: three limits</h2>
+    <p>Currie split the problem into three limits, each with a clear statistical meaning.</p>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th>Limit</th>
+    <th>Meaning</th>
+    <th>Well-known blank</th>
+    <th>Paired blank and sample</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>L<sub>C</sub></strong>, critical level</td>
+    <td>Decision point: above this, call the result "detected"</td>
+    <td>1.64 σ₀</td>
+    <td>2.33 σ₀</td>
+    </tr>
+    <tr>
+    <td><strong>L<sub>D</sub></strong>, detection limit</td>
+    <td>The smallest <em>true</em> amount that will be detected with high probability</td>
+    <td>3.29 σ₀</td>
+    <td>4.65 σ₀</td>
+    </tr>
+    <tr>
+    <td><strong>L<sub>Q</sub></strong>, determination limit</td>
+    <td>The level where a result has an acceptable relative uncertainty (10% here)</td>
+    <td>10 σ₀</td>
+    <td>14.1 σ₀</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <p>σ₀ is the standard deviation of the blank. The factors assume:</p>
+    <ul>
+    <li>α = 0.05: the chance of calling a blank "detected" (false positive)</li>
+    <li>β = 0.05: the chance of missing a sample truly at L<sub>D</sub> (false negative)</li>
+    <li>a standard deviation that does not change with concentration</li>
+    </ul>
+    <h2>The key idea: L<sub>C</sub> and L<sub>D</sub> are different</h2>
+    <p>This is the part most often lost in practice.</p>
+    <ul>
+    <li><strong>L<sub>C</sub> is about the measured result.</strong> It is a decision rule. It controls false positives only.</li>
+    <li><strong>L<sub>D</sub> is about the true amount in the sample.</strong> It controls false negatives as well. With α = β = 0.05 it is about <strong>twice</strong> L<sub>C</sub> (3.29 vs 1.64).</li>
+    </ul>
+    <p>A consequence follows directly from the definitions: if a sample truly contains exactly L<sub>C</sub>, its measured results scatter around L<sub>C</sub>, so it will be called "detected" only about <strong>half the time</strong>.</p>
+    <p>And neither limit means the number is a good measurement. Quantitative results start around <strong>L<sub>Q</sub></strong>, which is about <strong>three times</strong> L<sub>D</sub> (10 vs 3.29).</p>
+    <h2>The idea in one picture</h2>
+    <figure><img src="img/currie-limits.svg" alt="Currie's three limits on two normal curves" loading="lazy"></figure>
+    <p><strong>How to read it</strong></p>
+    <ul>
+    <li><strong>Grey curve:</strong> results you would get from a blank, a sample with nothing in it. They scatter around zero with standard deviation σ₀.</li>
+    <li><strong>Teal curve:</strong> results from a sample whose true amount is exactly L<sub>D</sub>. They scatter around L<sub>D</sub> with the same σ₀.</li>
+    <li><strong>Red dashed line, L<sub>C</sub> = 1.64σ₀:</strong> the decision rule. Any result to the right is reported as "detected".</li>
+    <li><strong>Red shaded tail (α = 5%):</strong> blank results that land right of L<sub>C</sub>. These are false positives.</li>
+    <li><strong>Orange shaded tail (β = 5%):</strong> results from the L<sub>D</sub> sample that land left of L<sub>C</sub>. These are missed detections.</li>
+    </ul>
+    <p><strong>How L<sub>D</sub> is calculated</strong></p>
+    <p>L<sub>D</sub> is placed so that the two shaded tails are both 5%. Each tail sits 1.645σ₀ from its curve's center, so:</p>
+    <ul>
+    <li>L<sub>C</sub> = 1.645σ₀ (the blank curve's 95th percentile)</li>
+    <li>L<sub>D</sub> = L<sub>C</sub> + 1.645σ₀ = 3.29σ₀</li>
+    </ul>
+    <p><strong>L<sub>Q</sub></strong> sits far to the right at 10σ₀, where one standard deviation is 10% of the value. That is where a number becomes a measurement, not just a yes or no.</p>
+    <p>To make the figure yourself: <code>python make_figure.py</code> (needs numpy, scipy, matplotlib).</p>
+    <h2>What came after</h2>
+    <p>According to NIST, Currie's framework was taken up across measurement practice, international standards, regulation and software. It led to a harmonized ISO–IUPAC position on detection, decision and determination limits, now part of the IUPAC Compendium of Analytical Nomenclature.</p>
+    <p>The rest of this series looks at two definitions used in practice and compares them with Currie's:</p>
+    <ul>
+    <li><a href="detection-limits-epa.html">Part 2</a>: the US EPA MDL, which in its original form is a decision threshold like L<sub>C</sub></li>
+    <li><a href="detection-limits-semi-c10.html">Part 3</a>: SEMI C10, used for semiconductor process chemicals, which builds the MDL from a calibration curve</li>
+    </ul>
+    <h2>Practical takeaways</h2>
+    <ol>
+    <li><strong>"Not detected" is not "zero".</strong> A sample below L<sub>C</sub> can still contain up to about L<sub>D</sub> without being reliably seen.</li>
+    <li><strong>"Detected" is not "measured".</strong> Between L<sub>C</sub> and L<sub>Q</sub>, report with care, or report as detected but not quantified.</li>
+    <li><strong>Always say which limit you mean.</strong> "Detection limit" alone could be L<sub>C</sub> or L<sub>D</sub>, and they differ by a factor of two.</li>
+    </ol>
+    <h2>How this note was made</h2>
+    <p>I used an AI assistant (Claude) to find sources, then read the NIST commentary on Currie's paper and checked every number against it. One correction came out of that check: the author's name is Currie, not Curry.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">References</h2><ol>
+    <li>L. A. Currie, "Limits for Qualitative Detection and Quantitative Determination: Application to Radiochemistry", <em>Anal. Chem.</em>, 1968, 40, 586–593.</li>
+    <li>NIST, <a href="https://nvlpubs.nist.gov/nistpubs/sp958-lide/html/164-166.html">commentary on Currie (1968), NIST SP 958, pp. 164–166</a>.</li>
+    </ol></section>
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>

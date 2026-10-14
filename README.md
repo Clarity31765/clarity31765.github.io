@@ -4,7 +4,11 @@
 
 ```
 index.html                     홈 (소개·경력·툴킷·글·AI 활용)
-notes/detection-limits.html    첫 글: Currie / EPA MDL / SEMI C10 비교
+notes/au-ta-standards.html     Au·Ta ICP-MS 표준용액 불안정 원인
+notes/nelson-rules.html        Nelson Rule 판정 도구 (코드: notes/code/)
+notes/detection-limits-*.html  검출한계 시리즈 3편 (Currie / EPA / SEMI C10)
+notes/detection-limits.html    예전 합본 글 주소 → 시리즈 1편으로 자동 이동
+notes/img/                     노트 그림 (SVG)
 assets/style.css               전체 스타일 (색·글꼴 토큰은 파일 맨 위)
 assets/favicon.svg             탭 아이콘
 404.html                       없는 주소로 들어왔을 때

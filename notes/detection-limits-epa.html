@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detection limits, part 2: the EPA MDL, from 1981 to Revision 2 — Oliver Lee</title>
+<meta name="description" content="The EPA method detection limit from Glaser et al. (1981) to 40 CFR 136 Appendix B Revision 2, with a worked example of the blank-based MDL.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/detection-limits-epa.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Detection limits, part 2: the EPA MDL, from 1981 to Revision 2">
+<meta property="og:description" content="The EPA method detection limit from Glaser et al. (1981) to 40 CFR 136 Appendix B Revision 2, with a worked example of the blank-based MDL.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/detection-limits-epa.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Detection limits, part 2: the EPA MDL, from 1981 to Revision 2</h1>
+    <p class="dek">How a wastewater procedure became the most quoted “MDL”, what was wrong with it, and what the 2017 revision changed.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+    <nav class="series" aria-label="Detection limits series"><span class="series-l">Series</span><ol><li><a href="detection-limits-currie.html">Part 1 · Currie</a></li><li><span aria-current="page">Part 2 · EPA MDL</span></li><li><a href="detection-limits-semi-c10.html">Part 3 · SEMI C10</a></li></ol></nav>
+
+    <h2>Why it matters outside environmental labs</h2>
+    <p>The EPA procedure is a US regulation for wastewater testing under the Clean Water Act. But its "7 replicates × t-value" recipe spread far beyond that, and many labs in other fields still calculate an "MDL" this way. Knowing where it came from, and what it does and does not tell you, helps when reading anyone's MDL.</p>
+    <h2>Origin: a 1981 paper</h2>
+    <p>The EPA MDL comes from a paper by EPA scientists:</p>
+    <div class="callout">
+    <p>J. A. Glaser, D. L. Foerst, G. D. McKee, S. A. Quave, W. L. Budde, "Trace analyses for wastewaters", <em>Environmental Science &amp; Technology</em>, 1981, 15, 1426–1435.</p>
+    </div>
+    <p>The procedure was then written into US regulation as <strong>Appendix B to 40 CFR Part 136</strong>, published in the Federal Register in 1984 (49 FR 43430). The 2017 rule describes this original procedure as promulgated in 1983 and not revised since. Both dates refer to the same procedure.</p>
+    <h2>The original MDL (Revision 1.11)</h2>
+    <ul>
+    <li>Defined as the minimum concentration that can be reported with <strong>99% confidence that the true concentration is greater than zero</strong>.</li>
+    <li>At least <strong>7 replicate</strong> spiked samples.</li>
+    <li><strong>MDL = t(n−1, 0.99) × s</strong>, where s is the standard deviation of the replicates. For 7 replicates, t = 3.143.</li>
+    </ul>
+    <h3>Compared with Currie</h3>
+    <p>Putting the two definitions side by side (see <a href="detection-limits-currie.html">Part 1</a>):</p>
+    <ul>
+    <li>The original EPA MDL controls <strong>false positives only</strong> (99% one-sided). In Currie's terms it is a <strong>decision threshold, like L<sub>C</sub></strong>.</li>
+    <li>It does <strong>not</strong> control false negatives. A sample truly at the MDL will be missed about half the time.</li>
+    <li>It is built from <strong>spiked replicates</strong>, not from blanks.</li>
+    </ul>
+    <h2>What went wrong in practice</h2>
+    <p>EPA and state lab-certification bodies list several weaknesses:</p>
+    <ul>
+    <li><strong>"Zero" cannot really be measured</strong>, and analytes often appear in blanks. The old MDL ignored blanks.</li>
+    <li><strong>Best-case numbers.</strong> Replicates could all be run on one day, often right after instrument maintenance.</li>
+    <li><strong>One instrument for all.</strong> Labs often ran the MDL on their most sensitive instrument and applied it to the others.</li>
+    <li><strong>Contamination now dominates.</strong> As instruments became more sensitive, background from the lab, consumables and equipment started to matter more than instrument noise.</li>
+    <li>Analytes often could not actually be measured at the MDL in a real sample.</li>
+    </ul>
+    <h2>The road to revision: the mercury method case</h2>
+    <p>The weaknesses were not only academic. They came to a head in a legal challenge:</p>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th>Date</th>
+    <th>Event</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>8 Jun 1999</td>
+    <td>EPA promulgates <strong>Method 1631 Revision B</strong> for ultra-trace mercury in water (64 FR 30417)</td>
+    </tr>
+    <tr>
+    <td>1999</td>
+    <td>Industry groups challenge the rule: <em>Alliance of Automobile Manufacturers et al. v. EPA</em>, No. 99-1420 (D.C. Cir.)</td>
+    </tr>
+    <tr>
+    <td>19 Oct 2000</td>
+    <td><strong>Settlement agreement.</strong> Among other terms, EPA agrees to assess its procedures for detection and quantitation limits and consider alternatives</td>
+    </tr>
+    <tr>
+    <td>12 Mar 2003</td>
+    <td>EPA publishes its assessment and proposes a revised MDL procedure plus a new quantitation level (ML)</td>
+    </tr>
+    <tr>
+    <td>8 Nov 2004</td>
+    <td>EPA <strong>withdraws</strong> the proposal; most commenters disfavored it. The existing MDL stays unchanged while EPA works with stakeholders</td>
+    </tr>
+    <tr>
+    <td>28 Aug 2017</td>
+    <td>Revision 2 is finalized (below)</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <p>So Revision 2 was not a direct result of the settlement. The settlement started a reassessment, the first proposal failed, and the version that finally passed came out of a later stakeholder process.</p>
+    <h2>Revision 2 (2017)</h2>
+    <p>The revision was suggested by The NELAC Institute and finalized in the <strong>Clean Water Act Methods Update Rule</strong> (Federal Register, 28 August 2017; effective <strong>27 September 2017</strong>).</p>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th></th>
+    <th>Revision 1.11</th>
+    <th>Revision 2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Definition</td>
+    <td>99% confidence the result is greater than zero</td>
+    <td>Lowest measured result that can be reported with 99% confidence as distinguishable from method blanks</td>
+    </tr>
+    <tr>
+    <td>Spiked samples</td>
+    <td>At least 7</td>
+    <td>At least 7, in at least 3 batches on 3 separate days</td>
+    </tr>
+    <tr>
+    <td>Method blanks</td>
+    <td>Not used</td>
+    <td>At least 7, giving a blank-based MDL (MDL<sub>b</sub>)</td>
+    </tr>
+    <tr>
+    <td>Reported MDL</td>
+    <td>t × s of spikes</td>
+    <td>The <strong>higher</strong> of MDL<sub>s</sub> (spikes) and MDL<sub>b</sub> (blanks)</td>
+    </tr>
+    <tr>
+    <td>Several instruments</td>
+    <td>Not addressed</td>
+    <td>Data pooled across instruments, at least 2 spikes and 2 blanks each</td>
+    </tr>
+    <tr>
+    <td>Ongoing checks</td>
+    <td>None required</td>
+    <td>Spikes every quarter; recalculate at least every 13 months</td>
+    </tr>
+    <tr>
+    <td>Outlier removal</td>
+    <td>Not specified</td>
+    <td>Statistical outlier removal not allowed; only documented gross failures</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <h3>The blank-based MDL</h3>
+    <ul>
+    <li>If <strong>no</strong> blank gives a numerical result, MDL<sub>b</sub> does not apply.</li>
+    <li>If <strong>some</strong> blanks give numerical results, MDL<sub>b</sub> is the highest blank result (or the 99th percentile with 100 or more blanks).</li>
+    <li>If <strong>all</strong> blanks give numerical results, MDL<sub>b</sub> = blank mean + t(n−1, 0.99) × blank standard deviation (a negative mean is taken as zero).</li>
+    </ul>
+    <h3>What did not change</h3>
+    <p>The calculation from spiked samples is the same. What changed is that the MDL now has to hold up against <strong>real blanks</strong> and <strong>real day-to-day variation</strong>, not one good day.</p>
+    <h2>The calculation in one picture</h2>
+    <figure><img src="img/epa-mdl-rev2.svg" alt="EPA MDL Revision 2: spikes, blanks and the higher-of-two rule" loading="lazy"></figure>
+    <p><em>Example data: 7 spiked samples (true value 1.0 µg/L) and 7 method blanks, all in µg/L. For a short illustration they are shown as 7 replicates; a real Revision 2 study spreads them over at least 3 days.</em></p>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th>Replicate</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Spiked</td>
+    <td>1.38</td>
+    <td>1.39</td>
+    <td>1.45</td>
+    <td>1.35</td>
+    <td>1.28</td>
+    <td>1.35</td>
+    <td>1.42</td>
+    </tr>
+    <tr>
+    <td>Blank</td>
+    <td>0.62</td>
+    <td>0.21</td>
+    <td>0.24</td>
+    <td>0.51</td>
+    <td>0.51</td>
+    <td>0.35</td>
+    <td>0.42</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <p><strong>Step 1, from the spikes (teal):</strong> the spikes are tight, s = 0.055.
+    MDL<sub>s</sub> = 3.143 × 0.055 = <strong>0.173 µg/L</strong>. Under the old procedure, this would be the MDL.</p>
+    <p><strong>Step 2, from the blanks (red):</strong> every blank gives a number, with mean 0.41 and s = 0.151.
+    MDL<sub>b</sub> = 0.41 + 3.143 × 0.151 = <strong>0.883 µg/L</strong>.</p>
+    <p><strong>Step 3, report the higher:</strong> MDL = <strong>0.883 µg/L</strong>, about 5 times the old value.</p>
+    <p><strong>What the picture shows:</strong> the spikes alone suggest a method that can see 0.17 µg/L. But the blanks regularly read 0.2 to 0.6 µg/L, so a sample result of 0.3 µg/L could easily be nothing but blank. The old MDL hides that; the blank-based MDL exposes it.</p>
+    <p>The spike recovery here is about 137%, another hint that the blank is adding to every result.</p>
+    <p>To make the figure yourself: <code>python make_figure.py</code> (needs numpy, matplotlib).</p>
+    <h2>Practical takeaways</h2>
+    <ol>
+    <li><strong>Ask which revision.</strong> An MDL from the old one-day procedure is likely lower than one from Revision 2.</li>
+    <li><strong>At ultra-trace levels, blanks set the limit.</strong> This is the main lesson of Revision 2, and it applies just as much to ppt-level work in semiconductor chemicals.</li>
+    <li><strong>The EPA MDL is still a decision threshold.</strong> For a limit that also controls missed detections, or for quantification, look at Currie's L<sub>D</sub> and L<sub>Q</sub>.</li>
+    </ol>
+    <h2>How this note was made</h2>
+    <p>I used an AI assistant (Claude) to find sources, then read the regulation text (Code of Federal Regulations, Federal Register) and EPA pages and checked each fact against them. The check found that official sources give two years (1983 and 1984) for the original procedure. Both are noted above rather than picking one. It also showed that the 2017 revision did not follow directly from the 2000 mercury-method settlement: a first proposal in 2003 was withdrawn in 2004.</p>
+    <p>The example data come from my own earlier training material; the MDL values were recalculated from them in code and match.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">References</h2><ol>
+    <li>J. A. Glaser, D. L. Foerst, G. D. McKee, S. A. Quave, W. L. Budde, "Trace analyses for wastewaters", <em>Environ. Sci. Technol.</em>, 1981, 15, 1426–1435. Cited in <a href="https://water.usgs.gov/owq/OFR_99-193/references.html">USGS OFR 99-193 references</a>.</li>
+    <li>US EPA, Definition and Procedure for the Determination of the Method Detection Limit, 40 CFR 136 App. B, 49 FR 43430 (1984). Original wording preserved in <a href="https://www.law.cornell.edu/cfr/text/40/appendix-C_to_part_425">40 CFR 425 App. C</a>.</li>
+    <li>US EPA, <a href="https://www.law.cornell.edu/cfr/text/40/appendix-B_to_part_136">40 CFR 136 Appendix B — Revision 2</a>, 82 FR 40939 (28 Aug 2017).</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2017-08-28/html/2017-17271.htm">Clean Water Act Methods Update Rule, 28 Aug 2017</a>.</li>
+    <li>US EPA, <a href="https://www.epa.gov/node/166873">Method Detection Limit — Frequent Questions</a>.</li>
+    <li>Wisconsin DNR, <a href="https://dnr.wisconsin.gov/sites/default/files/topic/LabCert/EPA_MDL_Overview_2.5.18.pdf">EPA MDL Overview (2018)</a>.</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2001-06-18/html/01-15145.htm">Method 1631 field-blank revision, 18 Jun 2001</a> (Method 1631B promulgation, settlement of 19 Oct 2000).</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2004-11-08/pdf/04-24823.pdf">Withdrawal of proposed detection and quantitation revisions, 8 Nov 2004</a>.</li>
+    </ol></section>
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>

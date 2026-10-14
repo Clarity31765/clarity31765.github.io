@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Au and Ta ICP-MS standards go bad in about a week — Oliver Lee</title>
+<meta name="description" content="Why low-level gold and tantalum ICP-MS standards in 2% nitric acid degrade within days, why the Au background rises at m/z 197, and what to change.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/au-ta-standards.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Au and Ta ICP-MS standards go bad in about a week">
+<meta property="og:description" content="Why low-level gold and tantalum ICP-MS standards in 2% nitric acid degrade within days, why the Au background rises at m/z 197, and what to change.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/au-ta-standards.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Why Au and Ta ICP-MS standards go bad in about a week</h1>
+    <p class="dek">Gold sticks to the bottle, tantalum needs fluoride, and the two together push up the background at m/z 197. What the literature says, and what to change.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <h2>The problem</h2>
+    <p>In a lab running ICP-MS on high-purity process chemicals, the low-level <strong>gold (Au)</strong> and <strong>tantalum (Ta)</strong> working standards stopped giving reliable results about a week after preparation. At the same time, the <strong>Au background</strong> went up.</p>
+    <p>Working conditions:</p>
+    <ul>
+    <li>Containers: <strong>PFA</strong></li>
+    <li>Matrix: <strong>2% HNO₃</strong>, with no HCl or HF</li>
+    </ul>
+    <p>The question was simple: is this expected, and if so, what is the fix?</p>
+    <h2>Short answer</h2>
+    <p>Yes, it is expected. Under these conditions both elements are outside their stable range, and the two problems are linked.</p>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th></th>
+    <th>Cause</th>
+    <th>Fix</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Au</strong></td>
+    <td>Sticks to container walls in nitric acid</td>
+    <td>Use an HCl matrix (about 1% v/v)</td>
+    </tr>
+    <tr>
+    <td><strong>Ta</strong></td>
+    <td>Not held in solution without fluoride</td>
+    <td>Raise HNO₃ to 5%; if needed, add trace HF (≤0.1% v/v)</td>
+    </tr>
+    <tr>
+    <td><strong>Au background</strong></td>
+    <td>Au released from walls and tubing, plus TaO⁺ at mass 197</td>
+    <td>Sulfur-based rinse; O₂ reaction gas for TaO⁺</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <h2>1. Gold: lost to the container wall</h2>
+    <p>The standards supplier Inorganic Ventures reports that, at ppb levels in 1% HNO₃ in polyethylene, only two elements are incompatible: Au and Hg. Both chemically adsorb onto the container wall and are not stable for 24 hours.</p>
+    <p>The loss depends on concentration, because the wall can take up only a limited amount:</p>
+    <ul>
+    <li>100 ppb Au can be used the next day, but not after 72 hours.</li>
+    <li>1000 ppm Au in nitric acid stays stable for more than 12 months.</li>
+    <li>The supplier estimates that a PE container surface can take up about 100 µg of Au before adsorption stops. They note this is deduced, not validated.</li>
+    </ul>
+    <p><strong>Fix:</strong> prepare Au in an HCl matrix. The supplier expects 1% v/v HCl to remove the problem. They use 10% themselves but consider that more than needed.</p>
+    <h2>2. Tantalum: needs fluoride to stay in solution</h2>
+    <p>Ta, like Nb, is kept in solution as a fluoride complex. Commercial Ta stock standards are supplied with HF for this reason.</p>
+    <p>Inorganic Ventures has seen low-ppb Ta become unstable within weeks when diluted only in 2% HNO₃, which is exactly the condition here. Their advice, in order:</p>
+    <ol>
+    <li>Raise HNO₃ to <strong>5%</strong>.</li>
+    <li>If that is not enough, add trace <strong>HF (0.1% v/v or less)</strong>.</li>
+    <li>Clean preparation containers hard: leach in <strong>5% HNO₃ at 60 °C for at least 60 hours</strong>, then rinse well. Mixed standards below 100 ppb often benefit from this.</li>
+    </ol>
+    <h2>3. Why the Au background goes up</h2>
+    <p>Two mechanisms, which can act at the same time:</p>
+    <p><strong>Memory effect.</strong> Au that adsorbed onto the walls and the sample path is slowly released into later solutions, including blanks. This shows up as a rising baseline at m/z 197.</p>
+    <p><strong>TaO⁺ interference.</strong> Au has only one isotope, ¹⁹⁷Au. The oxide ion ¹⁸¹Ta¹⁶O⁺ has the same nominal mass. A system that contains Ta, from a mixed standard or from Ta memory, will add signal at 197.</p>
+    <p><strong>Fixes from the literature:</strong></p>
+    <ul>
+    <li><strong>Rinse:</strong> Chen et al. (JAAS, 2000) showed that sulfur complexing agents clear Au memory quickly: 2% L-cysteine cleared 1 µg/mL Au in under a minute, and thiourea cleared 100 µg/mL in about two minutes.</li>
+    <li><strong>Interference:</strong> a 2015 RSC Advances paper used O₂ reaction gas to move TaO⁺ to higher oxides such as TaO₂⁺. Au does not react with O₂, so it stays at 197.</li>
+    </ul>
+    <h2>4. Applied to our conditions</h2>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th>Our condition</th>
+    <th>What the literature says</th>
+    <th>Change</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Au in 2% HNO₃</td>
+    <td>Low ppb: not stable for 24 h; 100 ppb: not stable at 72 h</td>
+    <td>Prepare Au separately in ~1% HCl</td>
+    </tr>
+    <tr>
+    <td>Ta in 2% HNO₃, no HF</td>
+    <td>Unstable within weeks at low ppb</td>
+    <td>5% HNO₃ first, then trace HF if needed</td>
+    </tr>
+    <tr>
+    <td>Au and Ta in the same standard</td>
+    <td>Ta memory can add TaO⁺ at m/z 197</td>
+    <td>Separate Au and Ta standards; O₂ mode for Au</td>
+    </tr>
+    <tr>
+    <td>Nitric acid rinse only</td>
+    <td>Does not remove adsorbed Au well</td>
+    <td>Add an L-cysteine or thiourea rinse step</td>
+    </tr>
+    <tr>
+    <td>PFA containers</td>
+    <td><strong>No published PFA data found</strong></td>
+    <td>Run our own short stability check (see below)</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <h2>5. What I could not confirm</h2>
+    <p>All the stability numbers above were measured in <strong>polyethylene (PE / LDPE)</strong> containers. I did not find any published data that measures Au or Ta adsorption on <strong>PFA</strong>.</p>
+    <p>PFA is generally cleaner and less adsorptive than PE, so the problem may be smaller in PFA. That is a reasonable expectation, but it is not a measured result. The right next step is a short in-house check: prepare Au and Ta at the working level in each candidate matrix, and measure on day 0, 1, 3 and 7.</p>
+    <h2>How this note was made</h2>
+    <p>I used an AI assistant (Claude) to search for and collect sources, then read the original pages and checked every number in this note against them.</p>
+    <p>During that check, one reference that had appeared in an early draft could not be traced to any real source, so it was removed. Every statement in this note now points to a source in the list below.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">References</h2><ol>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/answersquestion/overcoming-gold-stability-issues">"Overcoming gold stability issues"</a>, Chemical Stability and Compatibility forum, 2018.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/forum/chemical-stability-and-compatibility/stability-of-ta-and-nb-upon-dilution">"Stability of Ta and Nb upon dilution"</a>, Chemical Stability and Compatibility forum, 2018.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/answersquestion/gold-au-and-tantalum-w-ppb-standards">"Gold (Au) and tantalum ppb standards"</a>, forum answer.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/part-billion-stability-study">"Part-Per-Billion Stability Study"</a>.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/guides-and-papers/usp-232-and-ich-q3d-element-stability-in-icp-standards">"USP 232 and ICH Q3D Element Stability in ICP Standards"</a>.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/blog/icp-oes-icp-ms-strategies-gold-platinum-palladium-analysis">"ICP-OES &amp; ICP-MS Strategies for Gold, Platinum, and Palladium Analysis"</a>.</li>
+    <li>Agilent Technologies, Tantalum Standard 1000 µg/mL in 2% HF, Certificate of Analysis, part no. 5190-8531.</li>
+    <li>"Determination of sub-ng g⁻¹ Au in geological samples by IMR ICP-MS and CH₄ plasma modifier", <em>RSC Advances</em>, 2015. <a href="https://pubs.rsc.org/en/Content/ArticleLanding/2015/RA/C5RA19692B">Link</a></li>
+    <li>W. Chen, P. Wee, I. D. Brindle, <em>J. Anal. At. Spectrom.</em>, 2000, 15, 409–413. DOI: <a href="https://doi.org/10.1039/A908658G">10.1039/A908658G</a></li>
+    </ol></section>
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>

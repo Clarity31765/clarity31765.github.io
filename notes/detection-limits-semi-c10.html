@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detection limits, part 3: SEMI C10 and the semiconductor MDL — Oliver Lee</title>
+<meta name="description" content="SEMI C10 at concept level: why a multi-level, weighted approach differs from Currie and the EPA MDL. No standard text or formulas reproduced.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/detection-limits-semi-c10.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Detection limits, part 3: SEMI C10 and the semiconductor MDL">
+<meta property="og:description" content="SEMI C10 at concept level: why a multi-level, weighted approach differs from Currie and the EPA MDL. No standard text or formulas reproduced.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/detection-limits-semi-c10.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Detection limits, part 3: SEMI C10 and the semiconductor MDL</h1>
+    <p class="dek">The multi-level, weighted idea behind the detection-limit guide for semiconductor process chemicals, at concept level.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+    <nav class="series" aria-label="Detection limits series"><span class="series-l">Series</span><ol><li><a href="detection-limits-currie.html">Part 1 · Currie</a></li><li><a href="detection-limits-epa.html">Part 2 · EPA MDL</a></li><li><span aria-current="page">Part 3 · SEMI C10</span></li></ol></nav>
+
+    <div class="callout">
+    <p><strong>About this note:</strong> SEMI C10 is a copyrighted, paid standard. This note explains the idea behind it in my own words and does not reproduce its text, tables or formulas. Anyone applying it should buy the current edition from SEMI.</p>
+    </div>
+    <h2>Why it matters</h2>
+    <p>In semiconductor process chemicals and gases, specifications for trace metals and anions are set at ppb and ppt levels. Whether a supplier meets a specification depends on whether its method can see that low, so the MDL behind each result matters as much as the result itself. SEMI C10 is the guide the industry uses for this.</p>
+    <p><strong>Title:</strong> SEMI C10, <em>Guide for Determination of Method Detection Limits</em></p>
+    <h2>What SEMI says about it publicly</h2>
+    <ul>
+    <li><strong>Purpose:</strong> a minimum set of guidelines for determining an MDL quantitatively, for data that support a SEMI Process Chemicals or Gases specification.</li>
+    <li><strong>Scope:</strong> the trace contaminants named in SEMI process chemical and gas standards. Every relevant contaminant should have an MDL, found by <strong>regression analysis</strong>, that is at or below its specification.</li>
+    <li><strong>Use:</strong> both for setting new specifications and for checking performance against existing ones.</li>
+    <li><strong>Current edition:</strong> SEMI C10-1109 (Reapproved 1114). First published in 1998; earlier editions C10-0299 and C10-0305. Maintained by the Liquid Chemicals Global Technical Committee. References SEMI C16, <em>Guide for Precision Reporting / Data Traceability</em>.</li>
+    </ul>
+    <h2>The key difference: many levels, not one</h2>
+    <p>The EPA MDL (<a href="detection-limits-epa.html">Part 2</a>) uses replicates at <strong>one</strong> spike level. The result depends on that one choice, and says nothing about how precision changes with concentration.</p>
+    <p>SEMI C10 takes a <strong>multi-level</strong> view instead. In concept, it looks at how precision changes across several low concentrations, follows that trend down to zero concentration, and bases the MDL on the precision expected at zero. The exact procedure is in the standard itself.</p>
+    <h2>Why weighting</h2>
+    <p>At trace levels the scatter usually grows with concentration: replicates at 20 ppt spread more than replicates at 1 ppt. In a plain (unweighted) fit, the noisy high-level points pull a trend line as much as the precise low-level ones, even though the points nearest zero say most about precision at zero.</p>
+    <p>Weighting fixes this by giving precise, low-level points more say. A JMP statistics article notes that SEMI C10 recommends weighted least squares.</p>
+    <h2>The general idea in one picture</h2>
+    <p><em>This figure illustrates the general multi-level, weighted-regression idea with synthetic data. It is my own example, not a reproduction of the SEMI C10 procedure.</em></p>
+    <figure><img src="img/multilevel-weighted.svg" alt="Standard deviation against concentration, weighted and unweighted fits, intercept at zero" loading="lazy"></figure>
+    <p><em>Synthetic data: 7 replicates at 1, 2, 5, 10 and 20 ppt. No real data.</em></p>
+    <p><strong>How to read it</strong></p>
+    <ul>
+    <li><strong>Dots:</strong> the standard deviation of the 7 replicates at each level. Bigger dots carry more weight in the weighted fit (weight = 1 / SD²). The 1 and 2 ppt levels dominate.</li>
+    <li><strong>Grey dashed line:</strong> unweighted fit. Intercept s₀ = 0.143 ppt.</li>
+    <li><strong>Teal line:</strong> weighted fit. Intercept s₀ = 0.137 ppt.</li>
+    <li><strong>Diamonds at zero:</strong> where each trend line meets zero concentration, the estimated precision of a sample with nothing in it.</li>
+    </ul>
+    <p>In this example the two intercepts are close, because the data follow a clean straight line. With real data, where one or two levels are noisier than the trend, they can differ much more, and the weighted fit keeps the answer anchored to the low-level points.</p>
+    <p>To make the figure yourself: <code>python make_figure.py</code> (needs numpy, matplotlib).</p>
+    <h2>Comparing all three</h2>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th></th>
+    <th>Currie 1968 (<a href="detection-limits-currie.html">Part 1</a>)</th>
+    <th>EPA MDL (<a href="detection-limits-epa.html">Part 2</a>)</th>
+    <th>SEMI C10</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Built from</td>
+    <td>Blank standard deviation</td>
+    <td>Replicates at <strong>one</strong> spike level, plus blanks since 2017</td>
+    <td>Precision trend over <strong>several</strong> levels, followed down to zero</td>
+    </tr>
+    <tr>
+    <td>Statistics</td>
+    <td>Normal distribution, α and β both controlled</td>
+    <td>One-sided 99% Student's t</td>
+    <td>Weighted regression</td>
+    </tr>
+    <tr>
+    <td>Main weak point</td>
+    <td>Hard to apply directly in routine work</td>
+    <td>Depends on the chosen spike level</td>
+    <td>Result depends on how the weights are chosen</td>
+    </tr>
+    <tr>
+    <td>Main use</td>
+    <td>Scientific framework</td>
+    <td>US wastewater regulation</td>
+    <td>Semiconductor chemical and gas specifications</td>
+    </tr>
+    <tr>
+    <td>Access</td>
+    <td>Published paper</td>
+    <td>Free (US federal regulation)</td>
+    <td>Paid standard</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <p>So the same instrument and method can produce three different "MDLs". A number on a certificate means little unless it says which definition was used.</p>
+    <h2>Practical takeaways</h2>
+    <ol>
+    <li><strong>State the definition on every MDL.</strong> "MDL per SEMI C10-1109, multi-level" says far more than "MDL = 2 ppt".</li>
+    <li><strong>Check the low levels.</strong> In a weighted fit, the lowest levels drive the answer. If those replicates are poor, the MDL will be too.</li>
+    <li><strong>Check the weighting.</strong> The JMP article shows that weighting a <em>signal</em> calibration by inverse variance can give an implausibly small detection limit. Weights are a choice, and they should be stated.</li>
+    <li><strong>Blanks still matter.</strong> A regression extrapolated to zero is an estimate, not a measurement of the blank. At ppt levels, check real blanks too, the lesson of EPA's 2017 revision in <a href="detection-limits-epa.html">Part 2</a>.</li>
+    </ol>
+    <h2>What is not in this note</h2>
+    <ul>
+    <li>The procedure itself (steps, formulas, factors, number of levels and replicates) is only available to buyers of the standard, so it is left out on purpose.</li>
+    <li>I did not find a public statement from SEMI on whether C10 is based on Currie's framework.</li>
+    </ul>
+    <hr />
+    <p><em>This note stops where the standard begins. If you work with detection limits in high-purity chemicals, I'd welcome a conversation about the practice around them.</em></p>
+    <hr />
+    <h2>How this note was made</h2>
+    <p>SEMI C10 is sold only to licensed buyers, so this note stays at the level of concepts and public facts. I used an AI assistant (Claude) to check the public facts (edition, scope, history) against SEMI's own pages, to build the illustration from synthetic data, and to keep procedural detail from the standard out of the note.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">References</h2><ol>
+    <li>SEMI, <a href="https://store-us.semi.org/products/c01000-semi-c10-guide-for-determination-of-method-detection-limits">SEMI C10 product page</a>.</li>
+    <li>SEMI, <a href="https://www.semi.org/en/connect/events/determining-detection-limit-semi-c10">Determining the Detection Limit — SEMI C10 (SEMICON West 2022 workshop)</a>.</li>
+    <li>JMP User Community, <a href="https://community.jmp.com/t5/JMPer-Cable/Estimation-of-a-Limit-of-Detection/ba-p/20986">Estimation of a Limit of Detection</a>.</li>
+    </ol></section>
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>

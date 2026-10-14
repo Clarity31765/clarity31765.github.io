@@ -343,3 +343,16 @@ html[lang="ko"] .name .latin { font-family: Charter, "Bitstream Charter", "Iowan
 html[lang="ko"] .lede { max-width: 30em; }
 html[lang="ko"] .msms .ion.note { font-style: normal; }
 .tag-en { display: inline-block; margin-left: 8px; padding: 2px 6px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.6875rem; font-weight: 500; vertical-align: 2px; color: var(--muted); }
+
+/* ---------- Notes: series bar, figures, code (added 2026-10-14) ---------- */
+.series { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 40px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); font-size: var(--step--1); }
+.series-l { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 0.75rem; }
+.series ol { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none; }
+.series li + li { margin-top: 0; }
+.series [aria-current="page"] { color: var(--signal); font-weight: 600; }
+.prose figure img { display: block; width: 100%; height: auto; }
+.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; padding: 1px 5px; border-radius: 4px; background: var(--panel); color: var(--text); }
+.prose pre { margin: 20px 0; padding: 16px 18px; overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); line-height: 1.5; }
+.prose pre code { padding: 0; background: none; font-size: 0.8125rem; }
+.prose hr { margin: 40px 0; border: 0; border-top: 1px solid var(--line); }
+.prose .callout + .callout { margin-top: -12px; }

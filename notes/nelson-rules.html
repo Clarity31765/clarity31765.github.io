@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Nelson rules checker for QC control charts — Oliver Lee</title>
+<meta name="description" content="A small, tested Python tool that applies all eight Nelson rules to daily QC results on an Individuals chart.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/nelson-rules.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Nelson rules checker for QC control charts">
+<meta property="og:description" content="A small, tested Python tool that applies all eight Nelson rules to daily QC results on an Individuals chart.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/nelson-rules.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>A Nelson rules checker for QC control charts</h1>
+    <p class="dek">A single point beyond 3σ is easy to spot. Slow shifts and drifts are not, and those usually point to a real cause.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-10">October 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <p>A small Python tool that applies all <strong>eight Nelson rules</strong> to an Individuals (I) control chart and marks the samples that break them.</p>
+    <p>I wrote it to check daily QC results in a trace-analysis lab (for example, an ICP-MS check standard run every day). A single point beyond 3σ is easy to spot by eye. Slow shifts and drifts are not, and those are the ones that usually point to a real cause: a new standard lot, cone or tubing wear, a change in the rinse.</p>
+    <figure><img src="img/nelson-chart.svg" alt="Control chart with flagged points" loading="lazy"></figure>
+    <h2>What it does</h2>
+    <ol>
+    <li>Reads a CSV of results in run order.</li>
+    <li>Sets the center line and σ from a baseline period, using MR̄ / 1.128 (the usual estimate for an Individuals chart). You can also enter a fixed mean and σ from your own method validation.</li>
+    <li>Checks every point against the eight rules.</li>
+    <li>Writes <code>violations.csv</code> and <code>control_chart.png</code>.</li>
+    </ol>
+    <div class="table-wrap"><table>
+    <thead>
+    <tr>
+    <th>Rule</th>
+    <th>Pattern</th>
+    <th>What it often means in a lab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>1 point beyond 3σ</td>
+    <td>Gross error: contamination, wrong dilution, vial mix-up</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>9 in a row on one side of the center line</td>
+    <td>Shift: new standard or reagent lot, recalibration</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>6 in a row steadily up or down</td>
+    <td>Drift: cone or tubing wear, standard degrading</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>14 in a row alternating up and down</td>
+    <td>Over-adjustment, or two instruments/analysts alternating</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>2 of 3 beyond 2σ, same side</td>
+    <td>Early sign of a shift</td>
+    </tr>
+    <tr>
+    <td>6</td>
+    <td>4 of 5 beyond 1σ, same side</td>
+    <td>Small but sustained shift</td>
+    </tr>
+    <tr>
+    <td>7</td>
+    <td>15 in a row within 1σ</td>
+    <td>Variation too small: wrong σ, or mixed data sources</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <td>8 in a row beyond 1σ, both sides</td>
+    <td>Mixture of two populations</td>
+    </tr>
+    </tbody>
+    </table></div>
+    <p>Rule wording follows Nelson (1984), as summarized in the references below.</p>
+    <h2>Get the code</h2>
+    <p>The tool is four small files: <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/nelson_rules.py">nelson_rules.py</a>, <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/test_nelson_rules.py">test_nelson_rules.py</a>, <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/make_sample_data.py">make_sample_data.py</a> and <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/data/sample_qc.csv">data/sample_qc.csv</a>.</p>
+    <h2>Quick start</h2>
+    <pre><code class="language-bash">pip install numpy pandas matplotlib
+    python make_sample_data.py                                   # synthetic data only
+    python nelson_rules.py data/sample_qc.csv --baseline 25
+    python test_nelson_rules.py                                  # one test per rule
+    </code></pre>
+    <p>Output for the sample data:</p>
+    <pre><code>Center line = 9.9930, sigma = 0.1847 (MR-bar/1.128 from first 25 points)
+    4 pattern(s) found
+      sample  34  Rule 6: 4 of 5 points beyond 1 sigma, same side  [31-34]
+      sample  35  Rule 2: 9 points in a row on the same side of the center line  [27-35]
+      sample  51  Rule 3: 6 points in a row steadily increasing or decreasing  [46-51]
+      sample  58  Rule 1: 1 point beyond 3 sigma  [58-58]
+    </code></pre>
+    <p>The sample data has three planted problems: a shift at samples 31–40, a drift at 46–51, and an outlier at 58. All three are found. The shift is caught by Rule 6 at sample 34, a point that is still inside 2σ and would pass a simple limit check.</p>
+    <h2>Notes and limits</h2>
+    <ul>
+    <li><strong>The data is synthetic.</strong> No company or customer data is used anywhere in this repository.</li>
+    <li>σ comes from the baseline. If the baseline already contains a problem, the limits will be too wide. For a validated method, use <code>--mean</code> and <code>--sigma</code>.</li>
+    <li>Running all eight rules raises the false-alarm rate. In practice a lab often picks the rules that match its known failure modes, and writes down the response for each one.</li>
+    <li>Each pattern is reported at the first point where it is complete, not again for every following point.</li>
+    </ul>
+    <h2>How this was built</h2>
+    <p>I used an AI assistant (Claude) to draft the code. I then checked each rule against published definitions and wrote one hand-made test case per rule, including cases that must <strong>not</strong> trigger (8 points on one side is not Rule 2; 8 points beyond 1σ on one side only is not Rule 8).</p>
+    <h2>References</h2>
+    <ul>
+    <li>L. S. Nelson, "The Shewhart Control Chart — Tests for Special Causes", <em>Journal of Quality Technology</em>, 1984, 16(4), 237–239.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Nelson_rules">Nelson rules — Wikipedia</a></li>
+    <li><a href="https://www.qualitygurus.com/nelson-rules-and-western-electric-rules-for-control-charts/">Nelson Rules (and Western Electric Rules) — Quality Gurus</a></li>
+    </ul>
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>
