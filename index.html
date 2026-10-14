@@ -52,7 +52,7 @@
           <li><a href="#about" aria-current="true"><span class="toc-label">About</span><span class="toc-sub">13+ years in trace analysis</span></a></li>
           <li><a href="#experience"><span class="toc-label">Experience</span><span class="toc-sub">Since 2012, across the semiconductor materials spectrum</span></a></li>
           <li><a href="#writing"><span class="toc-label">Writing</span><span class="toc-sub">Notes on analytical methods</span></a></li>
-          <li><a href="#ai"><span class="toc-label">AI in the lab</span><span class="toc-sub">LLM workflows for QC reporting</span></a></li>
+          <li><a href="#ai"><span class="toc-label">AI in the lab</span><span class="toc-sub">AI drafts, checked against the source</span></a></li>
         </ol>
       </nav>
 
@@ -246,12 +246,30 @@
       <h2 id="ai-h">AI in the lab</h2>
       <div class="log">
         <article>
-          <h3>Rebuilding quality-system decks with an LLM</h3>
-          <p>Used Claude to rebuild a 50-slide IQC/PQC/OQC quality-system deck and a 14-slide detection-limit primer into one consistent template, including SPC, Cp/Cpk and cost-of-quality charts drawn from example data.</p>
+          <h3>Literature review, checked against the source</h3>
+          <p>Used Claude to collect supplier notes and papers on why low-level Au and Ta standards degrade, then read each original page and checked every number against it.</p>
           <dl>
-            <dt>Before</dt><dd>REPLACE_BEFORE (e.g. hours per deck)</dd>
-            <dt>After</dt><dd>REPLACE_AFTER</dd>
-            <dt>Human step</dt><dd>Technical review of every chart and formula before use.</dd>
+            <dt>AI step</dt><dd>Search, collect and draft the summary</dd>
+            <dt>Human step</dt><dd>Every figure traced to its source; one reference that could not be traced was removed</dd>
+            <dt>Result</dt><dd><a href="notes/au-ta-standards.html">Au and Ta standards note</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>A small QC tool, written with AI and tested by hand</h3>
+          <p>Used Claude to draft a Python checker for the eight Nelson rules, then wrote one hand-made test per rule, including cases that must not trigger.</p>
+          <dl>
+            <dt>AI step</dt><dd>Draft the code and the synthetic data</dd>
+            <dt>Human step</dt><dd>Rules checked against published definitions; 8 tests, all passing</dd>
+            <dt>Result</dt><dd><a href="notes/nelson-rules.html">Nelson rules checker</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>Fact-checking a three-part series</h3>
+          <p>Used Claude to check a detection-limit series against primary sources: the Code of Federal Regulations, the Federal Register, NIST and SEMI.</p>
+          <dl>
+            <dt>AI step</dt><dd>Find and read the primary sources</dd>
+            <dt>Human step</dt><dd>Three corrections kept in the notes: the author’s name (Currie), two official years for the first EPA procedure, and a 2004 withdrawal that sits between the 2000 settlement and the 2017 revision</dd>
+            <dt>Result</dt><dd><a href="notes/detection-limits-currie.html">Detection limits series</a></dd>
           </dl>
         </article>
       </div>

@@ -54,7 +54,7 @@
           <li><a href="#about" aria-current="true"><span class="toc-label">소개</span><span class="toc-sub">13년 이상의 미량 분석</span></a></li>
           <li><a href="#experience"><span class="toc-label">경력</span><span class="toc-sub">2012년부터, 반도체 소재 전반에서</span></a></li>
           <li><a href="#writing"><span class="toc-label">글</span><span class="toc-sub">분석법에 관한 노트</span></a></li>
-          <li><a href="#ai"><span class="toc-label">실험실의 AI</span><span class="toc-sub">QC 보고 업무의 LLM 활용</span></a></li>
+          <li><a href="#ai"><span class="toc-label">실험실의 AI</span><span class="toc-sub">AI 초안, 원문으로 검증</span></a></li>
         </ol>
       </nav>
 
@@ -248,12 +248,30 @@
       <h2 id="ai-h">실험실의 AI</h2>
       <div class="log">
         <article>
-          <h3>LLM으로 품질시스템 교육자료 재구성</h3>
-          <p>Claude를 활용해 50장 분량의 IQC/PQC/OQC 품질시스템 자료와 14장 분량의 검출한계 입문 자료를 하나의 일관된 템플릿으로 재구성했습니다. 예시 데이터로 SPC, Cp/Cpk, 품질비용 차트도 함께 만들었습니다.</p>
+          <h3>문헌 조사, 원문으로 검증까지</h3>
+          <p>저농도 Au·Ta 표준용액이 왜 불안정해지는지 Claude로 제조사 기술자료와 논문을 모은 뒤, 원문을 하나씩 열어 모든 수치를 대조했습니다.</p>
           <dl>
-            <dt>이전</dt><dd>REPLACE_BEFORE (e.g. hours per deck)</dd>
-            <dt>이후</dt><dd>REPLACE_AFTER</dd>
-            <dt>사람의 역할</dt><dd>사용 전 모든 차트와 수식을 직접 기술 검토</dd>
+            <dt>AI가 한 일</dt><dd>자료 검색·수집, 요약 초안</dd>
+            <dt>사람의 역할</dt><dd>모든 수치를 출처까지 추적, 출처를 찾을 수 없는 참고문헌 1건 삭제</dd>
+            <dt>결과</dt><dd><a href="../notes/au-ta-standards.html" hreflang="en">Au·Ta 표준용액 노트 (영문)</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>AI로 짜고 직접 테스트한 QC 도구</h3>
+          <p>Claude로 Nelson Rule 8개를 판정하는 파이썬 코드 초안을 만들고, 걸리면 안 되는 경우까지 포함해 규칙마다 테스트를 직접 만들었습니다.</p>
+          <dl>
+            <dt>AI가 한 일</dt><dd>코드와 가상 데이터 초안</dd>
+            <dt>사람의 역할</dt><dd>공개된 규칙 정의와 대조, 테스트 8개 모두 통과</dd>
+            <dt>결과</dt><dd><a href="../notes/nelson-rules.html" hreflang="en">Nelson Rule 판정 도구 (영문)</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>3편짜리 시리즈 사실 확인</h3>
+          <p>검출한계 시리즈를 Claude로 1차 출처(미국 연방규정집, 연방관보, NIST, SEMI)와 대조했습니다.</p>
+          <dl>
+            <dt>AI가 한 일</dt><dd>1차 출처 찾기와 읽기</dd>
+            <dt>사람의 역할</dt><dd>바로잡은 세 가지를 글에 남김: 저자 이름(Currie), 첫 EPA 절차의 공식 연도 두 가지, 2000년 합의와 2017년 개정 사이의 2004년 철회</dd>
+            <dt>결과</dt><dd><a href="../notes/detection-limits-currie.html" hreflang="en">검출한계 시리즈 (영문)</a></dd>
           </dl>
         </article>
       </div>
