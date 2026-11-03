@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검출한계 3편: SEMI C10과 반도체 MDL — 이동춘</title>
+<meta name="description" content="개념 수준의 SEMI C10: 다수준·가중 방식이 Currie나 EPA MDL과 무엇이 다른지. 표준 원문이나 공식은 옮기지 않음.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-semi-c10.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/detection-limits-semi-c10.html">
+<link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="검출한계 3편: SEMI C10과 반도체 MDL">
+<meta property="og:description" content="개념 수준의 SEMI C10: 다수준·가중 방식이 Currie나 EPA MDL과 무엇이 다른지. 표준 원문이나 공식은 옮기지 않음.">
+<meta property="og:url" content="https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html">
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="topbar"><nav class="lang" aria-label="언어 선택"><a href="../../notes/detection-limits-semi-c10.html" lang="en" hreflang="en">EN</a><a href="detection-limits-semi-c10.html" lang="ko" hreflang="ko" aria-current="true">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">이동춘</a> / <a href="../index.html#writing">글</a></p>
+
+  <header class="article-head">
+    <h1>검출한계 3편: SEMI C10과 반도체 MDL</h1>
+    <p class="dek">반도체 공정 케미컬용 검출한계 가이드 뒤에 있는 다수준·가중 회귀의 개념.</p>
+    <p class="meta">글: 이동춘, <time datetime="2026-10">2026년 10월</time></p>
+  </header>
+
+  <article id="content" class="prose">
+<nav class="series" aria-label="검출한계 시리즈"><span class="series-l">시리즈</span><ol><li><a href="detection-limits-currie.html">1편 · Currie</a></li><li><a href="detection-limits-epa.html">2편 · EPA MDL</a></li><li><span aria-current="page">3편 · SEMI C10</span></li></ol></nav>
+    <div class="callout">
+    <p><strong>이 글에 관해:</strong> SEMI C10은 저작권이 있는 유료 표준입니다. 이 글은 그 개념을 제 말로 설명할 뿐, 원문·표·공식을 옮기지 않습니다. 적용하려면 SEMI에서 최신판을 구입하세요.</p>
+    </div>
+    <h2>왜 중요한가</h2>
+    <p>반도체 공정 케미컬과 가스에서 미량 금속·음이온 규격은 ppb, ppt 수준으로 정해집니다. 공급사가 규격을 만족하는지는 분석법이 그만큼 낮게 볼 수 있는지에 달려 있으므로, 결과 뒤의 MDL이 결과만큼 중요합니다. SEMI C10은 업계가 이를 위해 쓰는 가이드입니다.</p>
+    <p><strong>제목:</strong> SEMI C10, <em>Guide for Determination of Method Detection Limits</em></p>
+    <h2>SEMI가 공개적으로 밝힌 내용</h2>
+    <ul>
+    <li><strong>목적:</strong> SEMI 공정 케미컬·가스 규격을 뒷받침하는 데이터에 대해, MDL을 정량적으로 정하는 최소한의 지침.</li>
+    <li><strong>범위:</strong> SEMI 공정 케미컬·가스 표준에 명시된 미량 오염물. 해당 오염물마다 <strong>회귀 분석</strong>으로 구한 MDL이 있어야 하고, 그 값이 규격 이하여야 합니다.</li>
+    <li><strong>용도:</strong> 새 규격 설정과 기존 규격 대비 성능 확인 모두.</li>
+    <li><strong>현행판:</strong> SEMI C10-1109 (Reapproved 1114). 1998년 첫 발행, 이전 판 C10-0299, C10-0305. Liquid Chemicals Global Technical Committee가 관리. SEMI C16, <em>Guide for Precision Reporting / Data Traceability</em>를 참조.</li>
+    </ul>
+    <h2>핵심 차이: 한 수준이 아니라 여러 수준</h2>
+    <p>EPA MDL(<a href="detection-limits-epa.html">2편</a>)은 <strong>한</strong> 스파이크 수준의 반복 측정을 씁니다. 결과는 그 선택 하나에 좌우되고, 농도에 따라 정밀도가 어떻게 변하는지는 알려 주지 않습니다.</p>
+    <p>SEMI C10은 대신 <strong>다수준</strong> 관점을 취합니다. 개념적으로는 여러 저농도에서 정밀도가 어떻게 변하는지 보고, 그 추세를 농도 0까지 따라가, 0에서 예상되는 정밀도로 MDL을 정합니다. 정확한 절차는 표준에 있습니다.</p>
+    <h2>왜 가중치인가</h2>
+    <p>미량 수준에서는 보통 농도가 높을수록 흩어짐이 커집니다. 20 ppt 반복값은 1 ppt 반복값보다 더 퍼집니다. 가중치 없는 단순 적합에서는 0에 가까운 점들이 0에서의 정밀도를 가장 잘 말해 주는데도, 잡음 많은 고농도 점이 정밀한 저농도 점만큼 추세선을 끌어당깁니다.</p>
+    <p>가중치는 정밀한 저농도 점에 더 큰 발언권을 줘서 이를 바로잡습니다. JMP 통계 글은 SEMI C10이 가중 최소제곱을 권장한다고 적고 있습니다.</p>
+    <h2>개념을 그림 한 장으로</h2>
+    <p><em>이 그림은 다수준·가중 회귀라는 일반 개념을 가상 데이터로 보인 것입니다. SEMI C10 절차를 옮긴 것이 아니라 제가 만든 예시입니다.</em></p>
+    <figure><img src="../../notes/img/multilevel-weighted.svg" alt="농도에 따른 표준편차, 가중·비가중 적합, 0에서의 절편" loading="lazy"></figure>
+    <p><em>가상 데이터: 1, 2, 5, 10, 20 ppt에서 각 7회 반복. 실제 데이터 없음.</em></p>
+    <p><strong>읽는 법</strong></p>
+    <ul>
+    <li><strong>점:</strong> 각 수준 7회 반복의 표준편차. 점이 클수록 가중 적합에서 가중치가 큽니다(가중치 = 1 / SD²). 1, 2 ppt가 지배합니다.</li>
+    <li><strong>회색 점선:</strong> 비가중 적합. 절편 s₀ = 0.143 ppt.</li>
+    <li><strong>청록 선:</strong> 가중 적합. 절편 s₀ = 0.137 ppt.</li>
+    <li><strong>0의 마름모:</strong> 각 추세선이 농도 0과 만나는 곳, 즉 아무것도 없는 시료의 추정 정밀도.</li>
+    </ul>
+    <p>이 예시에서는 데이터가 깨끗한 직선을 따라서 두 절편이 비슷합니다. 한두 수준이 추세보다 잡음이 큰 실제 데이터에서는 훨씬 크게 달라질 수 있고, 가중 적합은 답을 저농도 점에 붙잡아 둡니다.</p>
+    <p>그림을 직접 만들려면: <code>python make_figure.py</code> (numpy, matplotlib 필요).</p>
+    <h2>셋을 비교하면</h2>
+    <div class="table-wrap"><table>
+    <thead><tr><th></th><th>Currie 1968 (<a href="detection-limits-currie.html">1편</a>)</th><th>EPA MDL (<a href="detection-limits-epa.html">2편</a>)</th><th>SEMI C10</th></tr></thead>
+    <tbody>
+    <tr><td>근거</td><td>블랭크 표준편차</td><td><strong>한</strong> 스파이크 수준의 반복값, 2017년부터 블랭크 추가</td><td><strong>여러</strong> 수준의 정밀도 추세를 0까지 연장</td></tr>
+    <tr><td>통계</td><td>정규분포, α와 β 모두 관리</td><td>단측 99% Student's t</td><td>가중 회귀</td></tr>
+    <tr><td>주요 약점</td><td>일상 업무에 바로 쓰기 어려움</td><td>선택한 스파이크 수준에 좌우</td><td>가중치를 어떻게 정하느냐에 결과가 좌우</td></tr>
+    <tr><td>주 용도</td><td>과학적 틀</td><td>미국 폐수 규제</td><td>반도체 케미컬·가스 규격</td></tr>
+    <tr><td>접근</td><td>공개 논문</td><td>무료(미국 연방 규정)</td><td>유료 표준</td></tr>
+    </tbody></table></div>
+    <p>같은 장비와 분석법으로도 세 가지 다른 "MDL"이 나올 수 있습니다. 성적서의 숫자는 어떤 정의를 썼는지 밝히지 않으면 별 의미가 없습니다.</p>
+    <h2>실무 정리</h2>
+    <ol>
+    <li><strong>모든 MDL에 정의를 적으세요.</strong> "MDL = 2 ppt"보다 "SEMI C10-1109 기준 다수준 MDL"이 훨씬 많은 것을 말해 줍니다.</li>
+    <li><strong>저농도 수준을 확인하세요.</strong> 가중 적합에서는 가장 낮은 수준이 답을 좌우합니다. 그 반복값이 나쁘면 MDL도 나쁩니다.</li>
+    <li><strong>가중치를 확인하세요.</strong> JMP 글은 <em>신호</em> 검량선을 분산의 역수로 가중하면 비현실적으로 작은 검출한계가 나올 수 있음을 보여 줍니다. 가중치는 선택이므로 밝혀야 합니다.</li>
+    <li><strong>블랭크는 여전히 중요합니다.</strong> 0까지 외삽한 회귀는 추정이지 블랭크 측정이 아닙니다. ppt 수준에서는 실제 블랭크도 확인하세요. <a href="detection-limits-epa.html">2편</a>의 EPA 2017년 개정이 주는 교훈입니다.</li>
+    </ol>
+    <h2>이 글에 없는 것</h2>
+    <ul>
+    <li>절차 자체(단계, 공식, 계수, 수준·반복 수)는 표준 구매자만 볼 수 있으므로 일부러 뺐습니다.</li>
+    <li>C10이 Currie의 틀에 기반하는지에 대한 SEMI의 공개 입장은 찾지 못했습니다.</li>
+    </ul>
+    <hr />
+    <p><em>이 글은 표준이 시작되는 곳에서 멈춥니다. 고순도 케미컬에서 검출한계를 다루고 계시다면, 그 주변 실무에 관해 이야기 나누고 싶습니다.</em></p>
+    <hr />
+    <h2>이 글을 만든 방법</h2>
+    <p>SEMI C10은 라이선스 구매자에게만 판매되므로, 이 글은 개념과 공개된 사실 수준에 머뭅니다. AI 도우미(Claude)로 공개 사실(판, 범위, 이력)을 SEMI 자체 페이지와 대조하고, 가상 데이터로 그림을 만들고, 표준의 절차 세부가 글에 들어가지 않도록 점검했습니다.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">참고문헌</h2><ol>
+    <li>SEMI, <a href="https://store-us.semi.org/products/c01000-semi-c10-guide-for-determination-of-method-detection-limits">SEMI C10 product page</a>.</li>
+    <li>SEMI, <a href="https://www.semi.org/en/connect/events/determining-detection-limit-semi-c10">Determining the Detection Limit — SEMI C10 (SEMICON West 2022 workshop)</a>.</li>
+    <li>JMP User Community, <a href="https://community.jmp.com/t5/JMPer-Cable/Estimation-of-a-Limit-of-Detection/ba-p/20986">Estimation of a Limit of Detection</a>.</li>
+    </ol></section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">전체 글 보기</a></p>
+  </article>
+</div>
+<script src="../../assets/visits.js?v=3" defer></script>
+</body>
+</html>

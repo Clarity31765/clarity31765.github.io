@@ -10,10 +10,64 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/"/>
     <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/"/>
   </url>
-  <url><loc>https://clarity31765.github.io/notes/au-ta-standards.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://clarity31765.github.io/notes/nelson-rules-ai.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://clarity31765.github.io/notes/nelson-rules.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://clarity31765.github.io/notes/detection-limits-currie.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://clarity31765.github.io/notes/detection-limits-epa.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://clarity31765.github.io/notes/detection-limits-semi-c10.html</loc><lastmod>2026-10-14</lastmod></url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/au-ta-standards.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/au-ta-standards.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/au-ta-standards.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/au-ta-standards.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/au-ta-standards.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/au-ta-standards.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/nelson-rules-ai.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules-ai.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules-ai.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/nelson-rules-ai.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules-ai.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules-ai.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/nelson-rules.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/nelson-rules.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/detection-limits-currie.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-currie.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-currie.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/detection-limits-currie.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-currie.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-currie.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/detection-limits-epa.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-epa.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-epa.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/detection-limits-epa.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-epa.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-epa.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/notes/detection-limits-semi-c10.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-semi-c10.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html</loc><lastmod>2026-11-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-semi-c10.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-semi-c10.html"/>
+  </url>
 </urlset>

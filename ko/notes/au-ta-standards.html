@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Au·Ta ICP-MS 표준용액은 왜 일주일 만에 못 쓰게 되나 — 이동춘</title>
+<meta name="description" content="2% 질산에 만든 저농도 금·탄탈럼 ICP-MS 표준용액이 며칠 만에 열화되는 이유, m/z 197 Au 백그라운드가 오르는 이유, 그리고 바꿀 점.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/ko/notes/au-ta-standards.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/au-ta-standards.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/au-ta-standards.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/au-ta-standards.html">
+<link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Au·Ta ICP-MS 표준용액은 왜 일주일 만에 못 쓰게 되나">
+<meta property="og:description" content="2% 질산에 만든 저농도 금·탄탈럼 ICP-MS 표준용액이 며칠 만에 열화되는 이유, m/z 197 Au 백그라운드가 오르는 이유, 그리고 바꿀 점.">
+<meta property="og:url" content="https://clarity31765.github.io/ko/notes/au-ta-standards.html">
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="topbar"><nav class="lang" aria-label="언어 선택"><a href="../../notes/au-ta-standards.html" lang="en" hreflang="en">EN</a><a href="au-ta-standards.html" lang="ko" hreflang="ko" aria-current="true">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">이동춘</a> / <a href="../index.html#writing">글</a></p>
+
+  <header class="article-head">
+    <h1>Au·Ta ICP-MS 표준용액은 왜 일주일 만에 못 쓰게 되나</h1>
+    <p class="dek">금은 용기 벽에 붙고, 탄탈럼은 불소가 있어야 녹아 있으며, 둘이 함께 있으면 m/z 197 백그라운드가 올라갑니다. 문헌이 말하는 것과 바꿀 점.</p>
+    <p class="meta">글: 이동춘, <time datetime="2026-10">2026년 10월</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <h2>문제</h2>
+    <p>고순도 공정 케미컬을 ICP-MS로 분석하는 실험실에서, 저농도 <strong>금(Au)</strong>과 <strong>탄탈럼(Ta)</strong> 작업 표준용액이 만든 지 일주일쯤 지나면 결과를 믿을 수 없게 되었습니다. 같은 시기에 <strong>Au 백그라운드</strong>도 올라갔습니다.</p>
+    <p>작업 조건:</p>
+    <ul>
+    <li>용기: <strong>PFA</strong></li>
+    <li>매트릭스: <strong>2% HNO₃</strong>, HCl·HF 없음</li>
+    </ul>
+    <p>질문은 단순했습니다. 이게 원래 그런 것인가, 그렇다면 어떻게 고치나?</p>
+    <h2>짧은 답</h2>
+    <p>네, 예상되는 현상입니다. 이 조건에서는 두 원소 모두 안정 범위를 벗어나 있고, 두 문제는 서로 연결되어 있습니다.</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th></th><th>원인</th><th>대응</th></tr></thead>
+    <tbody>
+    <tr><td><strong>Au</strong></td><td>질산에서 용기 벽에 흡착</td><td>HCl 매트릭스 사용(약 1% v/v)</td></tr>
+    <tr><td><strong>Ta</strong></td><td>불소 없이는 용액에 유지되지 않음</td><td>HNO₃를 5%로 올리고, 필요하면 미량 HF(≤0.1% v/v) 첨가</td></tr>
+    <tr><td><strong>Au 백그라운드</strong></td><td>벽과 튜빙에서 Au가 다시 나옴 + 질량 197의 TaO⁺</td><td>황 계열 세정액; TaO⁺에는 O₂ 반응 가스</td></tr>
+    </tbody></table></div>
+    <h2>1. 금: 용기 벽으로 사라진다</h2>
+    <p>표준용액 제조사 Inorganic Ventures에 따르면, 폴리에틸렌 용기의 1% HNO₃에서 ppb 수준일 때 서로 맞지 않는 원소는 Au와 Hg 두 가지뿐입니다. 둘 다 용기 벽에 화학적으로 흡착되어 24시간도 안정하지 않습니다.</p>
+    <p>벽이 흡착할 수 있는 양에 한계가 있어서, 손실은 농도에 따라 달라집니다.</p>
+    <ul>
+    <li>100 ppb Au는 다음 날까지는 쓸 수 있지만 72시간 뒤에는 쓸 수 없습니다.</li>
+    <li>질산 속 1000 ppm Au는 12개월 넘게 안정합니다.</li>
+    <li>제조사는 PE 용기 표면이 흡착을 멈추기 전까지 약 100 µg의 Au를 흡착할 수 있다고 추정합니다. 검증값이 아니라 추론값이라고 밝히고 있습니다.</li>
+    </ul>
+    <p><strong>대응:</strong> Au는 HCl 매트릭스로 만듭니다. 제조사는 1% v/v HCl이면 문제가 사라질 것으로 봅니다. 자체적으로는 10%를 쓰지만 필요 이상이라고 봅니다.</p>
+    <h2>2. 탄탈럼: 불소가 있어야 녹아 있다</h2>
+    <p>Ta는 Nb처럼 불화 착물 형태로 용액에 유지됩니다. 시판 Ta 원액 표준에 HF가 들어 있는 이유입니다.</p>
+    <p>Inorganic Ventures는 저 ppb Ta를 2% HNO₃로만 희석했을 때 몇 주 안에 불안정해지는 것을 확인했습니다. 바로 우리 조건입니다. 권고 순서는 다음과 같습니다.</p>
+    <ol>
+    <li>HNO₃를 <strong>5%</strong>로 올린다.</li>
+    <li>그래도 부족하면 미량 <strong>HF(0.1% v/v 이하)</strong>를 넣는다.</li>
+    <li>조제 용기를 철저히 세척한다: <strong>5% HNO₃, 60 °C에서 60시간 이상</strong> 침출 후 충분히 헹굼. 100 ppb 미만 혼합 표준에서 효과를 보는 경우가 많습니다.</li>
+    </ol>
+    <h2>3. Au 백그라운드가 오르는 이유</h2>
+    <p>두 가지 메커니즘이 동시에 작용할 수 있습니다.</p>
+    <p><strong>메모리 효과.</strong> 용기 벽과 시료 경로에 흡착된 Au가 이후 용액, 블랭크까지 천천히 다시 나옵니다. m/z 197 기저선이 계속 오르는 모습으로 나타납니다.</p>
+    <p><strong>TaO⁺ 간섭.</strong> Au는 동위원소가 ¹⁹⁷Au 하나뿐입니다. 산화물 이온 ¹⁸¹Ta¹⁶O⁺가 같은 명목 질량을 가집니다. 혼합 표준이든 Ta 메모리든 시스템에 Ta가 있으면 197에 신호가 더해집니다.</p>
+    <p><strong>문헌의 대응:</strong></p>
+    <ul>
+    <li><strong>세정:</strong> Chen 등(JAAS, 2000)은 황 착화제가 Au 메모리를 빨리 없앤다는 것을 보였습니다. 2% L-시스테인은 1 µg/mL Au를 1분 안에, 티오우레아는 100 µg/mL를 약 2분 만에 제거했습니다.</li>
+    <li><strong>간섭:</strong> 2015년 RSC Advances 논문은 O₂ 반응 가스로 TaO⁺를 TaO₂⁺ 같은 고차 산화물로 옮겼습니다. Au는 O₂와 반응하지 않아 197에 그대로 남습니다.</li>
+    </ul>
+    <h2>4. 우리 조건에 적용</h2>
+    <div class="table-wrap"><table>
+    <thead><tr><th>우리 조건</th><th>문헌</th><th>변경</th></tr></thead>
+    <tbody>
+    <tr><td>2% HNO₃의 Au</td><td>저 ppb: 24시간 불안정, 100 ppb: 72시간에 불안정</td><td>Au는 약 1% HCl로 따로 조제</td></tr>
+    <tr><td>HF 없는 2% HNO₃의 Ta</td><td>저 ppb에서 몇 주 안에 불안정</td><td>먼저 5% HNO₃, 필요하면 미량 HF</td></tr>
+    <tr><td>Au와 Ta를 한 표준에</td><td>Ta 메모리가 m/z 197에 TaO⁺를 더할 수 있음</td><td>Au·Ta 표준 분리, Au는 O₂ 모드</td></tr>
+    <tr><td>질산 세정만 사용</td><td>흡착된 Au를 잘 못 없앰</td><td>L-시스테인 또는 티오우레아 세정 단계 추가</td></tr>
+    <tr><td>PFA 용기</td><td><strong>공개된 PFA 데이터 찾지 못함</strong></td><td>자체 단기 안정성 확인(아래)</td></tr>
+    </tbody></table></div>
+    <h2>5. 확인하지 못한 것</h2>
+    <p>위의 안정성 수치는 모두 <strong>폴리에틸렌(PE / LDPE)</strong> 용기에서 측정된 것입니다. <strong>PFA</strong>에서 Au나 Ta 흡착을 측정한 공개 자료는 찾지 못했습니다.</p>
+    <p>PFA는 일반적으로 PE보다 깨끗하고 흡착이 적어서, 문제가 더 작을 수 있습니다. 합리적인 예상이지만 측정 결과는 아닙니다. 다음 단계는 짧은 자체 확인입니다. 후보 매트릭스마다 작업 농도로 Au·Ta를 조제하고 0, 1, 3, 7일째에 측정합니다.</p>
+    <h2>이 글을 만든 방법</h2>
+    <p>AI 도우미(Claude)로 자료를 검색·수집한 뒤, 원문을 직접 읽고 이 글의 모든 수치를 대조했습니다.</p>
+    <p>그 과정에서 초안에 있던 참고문헌 하나가 실제 출처로 추적되지 않아 삭제했습니다. 지금은 모든 내용이 아래 목록의 출처를 가리킵니다.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">참고문헌</h2><ol>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/answersquestion/overcoming-gold-stability-issues">"Overcoming gold stability issues"</a>, Chemical Stability and Compatibility forum, 2018.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/forum/chemical-stability-and-compatibility/stability-of-ta-and-nb-upon-dilution">"Stability of Ta and Nb upon dilution"</a>, Chemical Stability and Compatibility forum, 2018.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/answersquestion/gold-au-and-tantalum-w-ppb-standards">"Gold (Au) and tantalum ppb standards"</a>, forum answer.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/part-billion-stability-study">"Part-Per-Billion Stability Study"</a>.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/guides-and-papers/usp-232-and-ich-q3d-element-stability-in-icp-standards">"USP 232 and ICH Q3D Element Stability in ICP Standards"</a>.</li>
+    <li>Inorganic Ventures, <a href="https://www.inorganicventures.com/blog/icp-oes-icp-ms-strategies-gold-platinum-palladium-analysis">"ICP-OES &amp; ICP-MS Strategies for Gold, Platinum, and Palladium Analysis"</a>.</li>
+    <li>Agilent Technologies, Tantalum Standard 1000 µg/mL in 2% HF, Certificate of Analysis, part no. 5190-8531.</li>
+    <li>"Determination of sub-ng g⁻¹ Au in geological samples by IMR ICP-MS and CH₄ plasma modifier", <em>RSC Advances</em>, 2015. <a href="https://pubs.rsc.org/en/Content/ArticleLanding/2015/RA/C5RA19692B">Link</a></li>
+    <li>W. Chen, P. Wee, I. D. Brindle, <em>J. Anal. At. Spectrom.</em>, 2000, 15, 409–413. DOI: <a href="https://doi.org/10.1039/A908658G">10.1039/A908658G</a></li>
+    </ol></section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">전체 글 보기</a></p>
+  </article>
+</div>
+<script src="../../assets/visits.js?v=3" defer></script>
+</body>
+</html>

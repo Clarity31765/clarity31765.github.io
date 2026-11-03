@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검출한계 2편: EPA MDL, 1981년부터 Revision 2까지 — 이동춘</title>
+<meta name="description" content="Glaser 등(1981)에서 40 CFR 136 Appendix B Revision 2까지의 EPA 방법검출한계, 블랭크 기반 MDL 계산 예시 포함.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/ko/notes/detection-limits-epa.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/detection-limits-epa.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/detection-limits-epa.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/detection-limits-epa.html">
+<link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="검출한계 2편: EPA MDL, 1981년부터 Revision 2까지">
+<meta property="og:description" content="Glaser 등(1981)에서 40 CFR 136 Appendix B Revision 2까지의 EPA 방법검출한계, 블랭크 기반 MDL 계산 예시 포함.">
+<meta property="og:url" content="https://clarity31765.github.io/ko/notes/detection-limits-epa.html">
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="topbar"><nav class="lang" aria-label="언어 선택"><a href="../../notes/detection-limits-epa.html" lang="en" hreflang="en">EN</a><a href="detection-limits-epa.html" lang="ko" hreflang="ko" aria-current="true">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">이동춘</a> / <a href="../index.html#writing">글</a></p>
+
+  <header class="article-head">
+    <h1>검출한계 2편: EPA MDL, 1981년부터 Revision 2까지</h1>
+    <p class="dek">폐수 분석 절차가 어떻게 가장 많이 인용되는 'MDL'이 되었는지, 무엇이 문제였는지, 2017년 개정이 무엇을 바꿨는지.</p>
+    <p class="meta">글: 이동춘, <time datetime="2026-10">2026년 10월</time></p>
+  </header>
+
+  <article id="content" class="prose">
+<nav class="series" aria-label="검출한계 시리즈"><span class="series-l">시리즈</span><ol><li><a href="detection-limits-currie.html">1편 · Currie</a></li><li><span aria-current="page">2편 · EPA MDL</span></li><li><a href="detection-limits-semi-c10.html">3편 · SEMI C10</a></li></ol></nav>
+    <h2>환경 분석 밖에서도 중요한 이유</h2>
+    <p>EPA 절차는 미국 청정수법(Clean Water Act)에 따른 폐수 분석 규정입니다. 하지만 "반복 7회 × t값" 계산법은 그 범위를 훨씬 넘어 퍼졌고, 다른 분야의 많은 실험실이 지금도 이렇게 "MDL"을 계산합니다. 출처와, 이 값이 말해 주는 것과 말해 주지 않는 것을 알면 남의 MDL을 읽을 때 도움이 됩니다.</p>
+    <h2>기원: 1981년 논문</h2>
+    <p>EPA MDL은 EPA 연구진의 논문에서 나왔습니다.</p>
+    <div class="callout">
+    <p>J. A. Glaser, D. L. Foerst, G. D. McKee, S. A. Quave, W. L. Budde, "Trace analyses for wastewaters", <em>Environmental Science &amp; Technology</em>, 1981, 15, 1426–1435.</p>
+    </div>
+    <p>이 절차는 이후 미국 규정 <strong>40 CFR Part 136 Appendix B</strong>가 되어 1984년 연방관보에 게재되었습니다(49 FR 43430). 2017년 규칙은 이 원래 절차를 1983년에 공포되어 그 뒤 개정되지 않았다고 설명합니다. 두 연도 모두 같은 절차를 가리킵니다.</p>
+    <h2>원래의 MDL (Revision 1.11)</h2>
+    <ul>
+    <li>정의: <strong>실제 농도가 0보다 크다고 99% 신뢰</strong>로 보고할 수 있는 최소 농도.</li>
+    <li>스파이크 시료 <strong>최소 7회 반복</strong>.</li>
+    <li><strong>MDL = t(n−1, 0.99) × s</strong>, s는 반복 측정의 표준편차. 7회면 t = 3.143.</li>
+    </ul>
+    <h3>Currie와 비교</h3>
+    <p>두 정의를 나란히 놓으면(<a href="detection-limits-currie.html">1편</a> 참고):</p>
+    <ul>
+    <li>원래 EPA MDL은 <strong>위양성만</strong> 관리합니다(단측 99%). Currie의 용어로는 <strong>L<sub>C</sub> 같은 판정 기준</strong>입니다.</li>
+    <li>위음성은 관리하지 <strong>않습니다</strong>. 실제로 MDL에 있는 시료는 절반 정도 놓칩니다.</li>
+    <li>블랭크가 아니라 <strong>스파이크 반복 시료</strong>로 만듭니다.</li>
+    </ul>
+    <h2>실무에서 생긴 문제</h2>
+    <p>EPA와 주(州) 실험실 인증 기관이 꼽는 약점들입니다.</p>
+    <ul>
+    <li><strong>"0"은 실제로 잴 수 없고</strong>, 분석 대상이 블랭크에서 자주 나옵니다. 옛 MDL은 블랭크를 무시했습니다.</li>
+    <li><strong>최선의 숫자.</strong> 반복 측정을 하루에, 흔히 장비 정비 직후에 다 할 수 있었습니다.</li>
+    <li><strong>장비 하나로 전부.</strong> 가장 감도 좋은 장비로 MDL을 구해 다른 장비에도 적용하곤 했습니다.</li>
+    <li><strong>이제는 오염이 지배.</strong> 장비 감도가 좋아지면서 실험실·소모품·기구에서 오는 백그라운드가 장비 잡음보다 중요해졌습니다.</li>
+    <li>실제 시료에서는 MDL 수준을 잴 수 없는 경우가 많았습니다.</li>
+    </ul>
+    <h2>개정까지: 수은 분석법 사건</h2>
+    <p>약점은 학술적인 이야기로 끝나지 않고 법적 분쟁으로 번졌습니다.</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>날짜</th><th>사건</th></tr></thead>
+    <tbody>
+    <tr><td>1999-06-08</td><td>EPA가 물 속 극미량 수은 분석법 <strong>Method 1631 Revision B</strong> 공포(64 FR 30417)</td></tr>
+    <tr><td>1999</td><td>업계 단체가 규칙에 이의 제기: <em>Alliance of Automobile Manufacturers et al. v. EPA</em>, No. 99-1420 (D.C. Cir.)</td></tr>
+    <tr><td>2000-10-19</td><td><strong>합의.</strong> 여러 조건 중 하나로 EPA가 검출·정량 한계 절차를 평가하고 대안을 검토하기로 함</td></tr>
+    <tr><td>2003-03-12</td><td>EPA가 평가 결과를 내고, 개정 MDL 절차와 새 정량 수준(ML)을 제안</td></tr>
+    <tr><td>2004-11-08</td><td>EPA가 제안을 <strong>철회</strong>. 의견 대부분이 반대. 이해관계자와 논의하는 동안 기존 MDL 유지</td></tr>
+    <tr><td>2017-08-28</td><td>Revision 2 확정(아래)</td></tr>
+    </tbody></table></div>
+    <p>즉 Revision 2는 합의의 직접 결과가 아닙니다. 합의로 재검토가 시작됐고, 첫 제안은 실패했으며, 최종안은 그 뒤의 이해관계자 논의에서 나왔습니다.</p>
+    <h2>Revision 2 (2017)</h2>
+    <p>The NELAC Institute가 제안한 개정안이 <strong>Clean Water Act Methods Update Rule</strong>(연방관보 2017년 8월 28일, <strong>2017년 9월 27일</strong> 시행)으로 확정되었습니다.</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th></th><th>Revision 1.11</th><th>Revision 2</th></tr></thead>
+    <tbody>
+    <tr><td>정의</td><td>결과가 0보다 크다고 99% 신뢰</td><td>방법 블랭크와 구별된다고 99% 신뢰로 보고할 수 있는 최저 측정값</td></tr>
+    <tr><td>스파이크 시료</td><td>최소 7개</td><td>최소 7개, 서로 다른 3일에 최소 3배치</td></tr>
+    <tr><td>방법 블랭크</td><td>사용 안 함</td><td>최소 7개, 블랭크 기반 MDL(MDL<sub>b</sub>) 산출</td></tr>
+    <tr><td>보고 MDL</td><td>스파이크의 t × s</td><td>MDL<sub>s</sub>(스파이크)와 MDL<sub>b</sub>(블랭크) 중 <strong>큰 값</strong></td></tr>
+    <tr><td>장비 여러 대</td><td>규정 없음</td><td>장비별로 스파이크·블랭크 최소 2개씩, 데이터를 합쳐 계산</td></tr>
+    <tr><td>지속 확인</td><td>요구 없음</td><td>분기마다 스파이크, 최소 13개월마다 재계산</td></tr>
+    <tr><td>이상값 제거</td><td>규정 없음</td><td>통계적 이상값 제거 불가, 기록된 명백한 실패만 제외</td></tr>
+    </tbody></table></div>
+    <h3>블랭크 기반 MDL</h3>
+    <ul>
+    <li>블랭크가 <strong>하나도</strong> 수치 결과를 내지 않으면 MDL<sub>b</sub>는 적용하지 않습니다.</li>
+    <li><strong>일부</strong> 블랭크만 수치 결과를 내면, MDL<sub>b</sub>는 가장 높은 블랭크 결과입니다(블랭크 100개 이상이면 99번째 백분위수).</li>
+    <li><strong>모든</strong> 블랭크가 수치 결과를 내면, MDL<sub>b</sub> = 블랭크 평균 + t(n−1, 0.99) × 블랭크 표준편차(평균이 음수면 0으로 봄).</li>
+    </ul>
+    <h3>바뀌지 않은 것</h3>
+    <p>스파이크 시료로 계산하는 방식은 같습니다. 바뀐 것은 MDL이 하루 좋은 날이 아니라 <strong>실제 블랭크</strong>와 <strong>실제 일간 변동</strong>을 견뎌야 한다는 점입니다.</p>
+    <h2>계산을 그림 한 장으로</h2>
+    <figure><img src="../../notes/img/epa-mdl-rev2.svg" alt="EPA MDL Revision 2: 스파이크, 블랭크, 큰 값 규칙" loading="lazy"></figure>
+    <p><em>예시 데이터: 스파이크 시료 7개(참값 1.0 µg/L)와 방법 블랭크 7개, 단위 µg/L. 짧은 설명을 위해 7회 반복으로 보였지만, 실제 Revision 2 연구는 최소 3일에 나눠 측정합니다.</em></p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>반복</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
+    <tbody>
+    <tr><td>스파이크</td><td>1.38</td><td>1.39</td><td>1.45</td><td>1.35</td><td>1.28</td><td>1.35</td><td>1.42</td></tr>
+    <tr><td>블랭크</td><td>0.62</td><td>0.21</td><td>0.24</td><td>0.51</td><td>0.51</td><td>0.35</td><td>0.42</td></tr>
+    </tbody></table></div>
+    <p><strong>1단계, 스파이크로(청록):</strong> 스파이크는 촘촘합니다, s = 0.055.
+    MDL<sub>s</sub> = 3.143 × 0.055 = <strong>0.173 µg/L</strong>. 옛 절차라면 이것이 MDL입니다.</p>
+    <p><strong>2단계, 블랭크로(빨강):</strong> 모든 블랭크가 수치를 내고, 평균 0.41, s = 0.151.
+    MDL<sub>b</sub> = 0.41 + 3.143 × 0.151 = <strong>0.883 µg/L</strong>.</p>
+    <p><strong>3단계, 큰 값 보고:</strong> MDL = <strong>0.883 µg/L</strong>, 옛 값의 약 5배.</p>
+    <p><strong>그림이 보여주는 것:</strong> 스파이크만 보면 0.17 µg/L까지 볼 수 있는 분석법 같습니다. 하지만 블랭크가 늘 0.2~0.6 µg/L로 나오므로, 0.3 µg/L인 시료 결과는 블랭크일 뿐일 수 있습니다. 옛 MDL은 이를 감추고, 블랭크 기반 MDL은 드러냅니다.</p>
+    <p>여기서 스파이크 회수율은 약 137%로, 블랭크가 모든 결과에 더해지고 있다는 또 다른 신호입니다.</p>
+    <p>그림을 직접 만들려면: <code>python make_figure.py</code> (numpy, matplotlib 필요).</p>
+    <h2>실무 정리</h2>
+    <ol>
+    <li><strong>어느 개정판인지 물어보세요.</strong> 옛 하루짜리 절차의 MDL은 Revision 2보다 낮게 나오기 쉽습니다.</li>
+    <li><strong>극미량에서는 블랭크가 한계를 정합니다.</strong> Revision 2의 핵심 교훈이며, 반도체 케미컬의 ppt 수준 분석에도 그대로 적용됩니다.</li>
+    <li><strong>EPA MDL은 여전히 판정 기준입니다.</strong> 놓친 검출까지 관리하는 한계나 정량에는 Currie의 L<sub>D</sub>와 L<sub>Q</sub>를 보세요.</li>
+    </ol>
+    <h2>이 글을 만든 방법</h2>
+    <p>AI 도우미(Claude)로 자료를 찾은 뒤, 규정 원문(미국 연방규정집, 연방관보)과 EPA 페이지를 읽고 사실을 하나씩 대조했습니다. 그 결과 공식 출처가 원래 절차의 연도를 두 가지(1983, 1984)로 적고 있음을 확인해, 하나를 고르지 않고 둘 다 적었습니다. 또 2017년 개정이 2000년 수은 분석법 합의에서 바로 나온 것이 아니라, 2003년 첫 제안이 2004년에 철회되었음도 확인했습니다.</p>
+    <p>예시 데이터는 제가 예전에 만든 교육 자료에서 가져왔고, MDL 값은 코드로 다시 계산해 일치함을 확인했습니다.</p>
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">참고문헌</h2><ol>
+    <li>J. A. Glaser, D. L. Foerst, G. D. McKee, S. A. Quave, W. L. Budde, "Trace analyses for wastewaters", <em>Environ. Sci. Technol.</em>, 1981, 15, 1426–1435. Cited in <a href="https://water.usgs.gov/owq/OFR_99-193/references.html">USGS OFR 99-193 references</a>.</li>
+    <li>US EPA, Definition and Procedure for the Determination of the Method Detection Limit, 40 CFR 136 App. B, 49 FR 43430 (1984). Original wording preserved in <a href="https://www.law.cornell.edu/cfr/text/40/appendix-C_to_part_425">40 CFR 425 App. C</a>.</li>
+    <li>US EPA, <a href="https://www.law.cornell.edu/cfr/text/40/appendix-B_to_part_136">40 CFR 136 Appendix B — Revision 2</a>, 82 FR 40939 (28 Aug 2017).</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2017-08-28/html/2017-17271.htm">Clean Water Act Methods Update Rule, 28 Aug 2017</a>.</li>
+    <li>US EPA, <a href="https://www.epa.gov/node/166873">Method Detection Limit — Frequent Questions</a>.</li>
+    <li>Wisconsin DNR, <a href="https://dnr.wisconsin.gov/sites/default/files/topic/LabCert/EPA_MDL_Overview_2.5.18.pdf">EPA MDL Overview (2018)</a>.</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2001-06-18/html/01-15145.htm">Method 1631 field-blank revision, 18 Jun 2001</a> (Method 1631B promulgation, settlement of 19 Oct 2000).</li>
+    <li>Federal Register, <a href="https://www.govinfo.gov/content/pkg/FR-2004-11-08/pdf/04-24823.pdf">Withdrawal of proposed detection and quantitation revisions, 8 Nov 2004</a>.</li>
+    </ol></section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">전체 글 보기</a></p>
+  </article>
+</div>
+<script src="../../assets/visits.js?v=3" defer></script>
+</body>
+</html>

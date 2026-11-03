@@ -7,6 +7,9 @@
 <meta name="description" content="A small, tested Python tool that applies all eight Nelson rules to daily QC results on an Individuals chart.">
 <meta name="theme-color" content="#0a0f17">
 <link rel="canonical" href="https://clarity31765.github.io/notes/nelson-rules.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/nelson-rules.html">
 <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
@@ -18,6 +21,7 @@
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
+<div class="topbar"><nav class="lang" aria-label="Language"><a href="nelson-rules.html" lang="en" hreflang="en" aria-current="true">EN</a><a href="../ko/notes/nelson-rules.html" lang="ko" hreflang="ko">한국어</a></nav></div>
 
 <div class="article-shell">
   <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
@@ -113,7 +117,7 @@
     <ul>
     <li><strong>The data is synthetic.</strong> No company or customer data is used anywhere in this repository.</li>
     <li>σ comes from the baseline. If the baseline already contains a problem, the limits will be too wide. For a validated method, use <code>--mean</code> and <code>--sigma</code>.</li>
-    <li>Running all eight rules raises the false-alarm rate. In practice a lab often picks the rules that match its known failure modes, and writes down the response for each one.</li>
+    <li>Running all eight rules raises the false-alarm rate. In practice a lab often picks the rules that match its known failure modes, and writes down the response for each one. Another option, keeping all eight on and letting AI sort the alarms, is in <a href="nelson-rules-ai.html">Two readings of the same control chart</a>.</li>
     <li>Each pattern is reported at the first point where it is complete, not again for every following point.</li>
     </ul>
     <h2>How this was built</h2>

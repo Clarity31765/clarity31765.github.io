@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QC 관리도용 넬슨 룰 판정 도구 — 이동춘</title>
+<meta name="description" content="Individuals 관리도의 일일 QC 결과에 넬슨 룰 8개를 모두 적용하는, 테스트를 갖춘 작은 파이썬 도구.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/ko/notes/nelson-rules.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/nelson-rules.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/nelson-rules.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/nelson-rules.html">
+<link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QC 관리도용 넬슨 룰 판정 도구">
+<meta property="og:description" content="Individuals 관리도의 일일 QC 결과에 넬슨 룰 8개를 모두 적용하는, 테스트를 갖춘 작은 파이썬 도구.">
+<meta property="og:url" content="https://clarity31765.github.io/ko/notes/nelson-rules.html">
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="topbar"><nav class="lang" aria-label="언어 선택"><a href="../../notes/nelson-rules.html" lang="en" hreflang="en">EN</a><a href="nelson-rules.html" lang="ko" hreflang="ko" aria-current="true">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">이동춘</a> / <a href="../index.html#writing">글</a></p>
+
+  <header class="article-head">
+    <h1>QC 관리도용 넬슨 룰 판정 도구</h1>
+    <p class="dek">3σ를 벗어난 점 하나는 눈에 잘 띕니다. 느린 shift와 drift는 그렇지 않고, 대개 그쪽에 진짜 원인이 있습니다.</p>
+    <p class="meta">글: 이동춘, <time datetime="2026-10">2026년 10월</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <p>Individuals(I) 관리도에 <strong>넬슨 룰 8개</strong>를 모두 적용하고, 규칙을 어긴 시료를 표시하는 작은 파이썬 도구입니다.</p>
+    <p>미량 분석 실험실의 일일 QC 결과(예: 매일 측정하는 ICP-MS 점검 표준)를 확인하려고 만들었습니다. 3σ를 벗어난 점 하나는 눈으로도 쉽게 찾습니다. 느린 shift와 drift는 그렇지 않고, 대개 그쪽이 실제 원인을 가리킵니다. 새 표준용액 Lot, 콘이나 튜빙 마모, 세정 조건 변경 같은 것들입니다.</p>
+    <figure><img src="../../notes/img/nelson-chart.svg" alt="이상 점이 표시된 관리도" loading="lazy"></figure>
+    <h2>하는 일</h2>
+    <ol>
+    <li>측정 순서대로 된 결과 CSV를 읽습니다.</li>
+    <li>기준 구간에서 중심선과 σ를 정합니다. σ는 MR̄ / 1.128(Individuals 관리도의 일반적인 추정)입니다. 분석법 검증에서 얻은 평균과 σ를 직접 넣을 수도 있습니다.</li>
+    <li>모든 점을 8개 규칙으로 확인합니다.</li>
+    <li><code>violations.csv</code>와 <code>control_chart.png</code>를 저장합니다.</li>
+    </ol>
+    <div class="table-wrap"><table>
+    <thead><tr><th>룰</th><th>패턴</th><th>실험실에서 흔히 뜻하는 것</th></tr></thead>
+    <tbody>
+    <tr><td>1</td><td>1개 점이 3σ 밖</td><td>돌발 오류: 오염, 희석 실수, 바이알 뒤바뀜</td></tr>
+    <tr><td>2</td><td>9개 연속 중심선 한쪽</td><td>Shift: 표준용액·시약 Lot 교체, 재교정</td></tr>
+    <tr><td>3</td><td>6개 연속 꾸준히 상승 또는 하강</td><td>Drift: 콘·튜빙 마모, 표준용액 열화</td></tr>
+    <tr><td>4</td><td>14개 연속 교대로 오르내림</td><td>과잉 조정, 또는 장비 2대·분석자 2명이 번갈아 측정</td></tr>
+    <tr><td>5</td><td>3개 중 2개가 같은 쪽 2σ 밖</td><td>Shift의 초기 신호</td></tr>
+    <tr><td>6</td><td>5개 중 4개가 같은 쪽 1σ 밖</td><td>작지만 지속되는 shift</td></tr>
+    <tr><td>7</td><td>15개 연속 1σ 안</td><td>변동이 너무 작음: σ 설정 오류, 또는 서로 다른 데이터 혼합</td></tr>
+    <tr><td>8</td><td>8개 연속 1σ 밖, 양쪽에 걸쳐</td><td>서로 다른 두 집단이 섞임</td></tr>
+    </tbody></table></div>
+    <p>규칙 문구는 아래 참고문헌에 요약된 Nelson(1984)을 따랐습니다.</p>
+    <h2>코드 받기</h2>
+    <p>도구는 작은 파일 4개입니다: <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/nelson_rules.py">nelson_rules.py</a>, <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/test_nelson_rules.py">test_nelson_rules.py</a>, <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/make_sample_data.py">make_sample_data.py</a>, <a href="https://github.com/Clarity31765/clarity31765.github.io/blob/main/notes/code/data/sample_qc.csv">data/sample_qc.csv</a>.</p>
+    <h2>빠른 실행</h2>
+    <pre><code class="language-bash">pip install numpy pandas matplotlib
+    python make_sample_data.py                                   # 가상 데이터만 생성
+    python nelson_rules.py data/sample_qc.csv --baseline 25
+    python test_nelson_rules.py                                  # 규칙마다 테스트 1개
+    </code></pre>
+    <p>예시 데이터의 출력:</p>
+    <pre><code>Center line = 9.9930, sigma = 0.1847 (MR-bar/1.128 from first 25 points)
+    4 pattern(s) found
+      sample  34  Rule 6: 4 of 5 points beyond 1 sigma, same side  [31-34]
+      sample  35  Rule 2: 9 points in a row on the same side of the center line  [27-35]
+      sample  51  Rule 3: 6 points in a row steadily increasing or decreasing  [46-51]
+      sample  58  Rule 1: 1 point beyond 3 sigma  [58-58]
+    </code></pre>
+    <p>예시 데이터에는 문제 세 가지를 일부러 넣었습니다. 31~40번 shift, 46~51번 drift, 58번 이상값. 셋 다 찾아냅니다. Shift는 34번 시료에서 룰 6으로 잡히는데, 이 점은 아직 2σ 안에 있어서 단순한 한계 확인으로는 통과됩니다.</p>
+    <h2>참고와 한계</h2>
+    <ul>
+    <li><strong>데이터는 가상입니다.</strong> 이 저장소 어디에도 회사나 고객 데이터를 쓰지 않았습니다.</li>
+    <li>σ는 기준 구간에서 나옵니다. 기준 구간에 이미 문제가 있으면 한계가 너무 넓어집니다. 검증된 분석법이라면 <code>--mean</code>과 <code>--sigma</code>를 쓰세요.</li>
+    <li>8개 규칙을 모두 돌리면 오경보율이 올라갑니다. 실제로는 실험실이 알고 있는 고장 유형에 맞는 규칙을 고르고, 규칙마다 대응을 적어 두는 경우가 많습니다. 모든 규칙을 켜 두고 경보 분류를 AI에 맡기는 방식은 <a href="nelson-rules-ai.html">같은 관리도, 두 가지 해석</a>에 정리했습니다.</li>
+    <li>각 패턴은 완성되는 첫 점에서 한 번만 보고하고, 이어지는 점마다 반복하지 않습니다.</li>
+    </ul>
+    <h2>만든 방법</h2>
+    <p>AI 도우미(Claude)로 코드 초안을 만들었습니다. 그다음 각 규칙을 공개된 정의와 대조하고, 규칙마다 직접 만든 테스트를 하나씩 썼습니다. 걸리면 <strong>안 되는</strong> 경우도 포함했습니다(한쪽 8개는 룰 2가 아님, 한쪽에만 1σ 밖 8개는 룰 8이 아님).</p>
+    <h2>참고문헌</h2>
+    <ul>
+    <li>L. S. Nelson, "The Shewhart Control Chart — Tests for Special Causes", <em>Journal of Quality Technology</em>, 1984, 16(4), 237–239.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Nelson_rules">Nelson rules — Wikipedia</a></li>
+    <li><a href="https://www.qualitygurus.com/nelson-rules-and-western-electric-rules-for-control-charts/">Nelson Rules (and Western Electric Rules) — Quality Gurus</a></li>
+    </ul>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">전체 글 보기</a></p>
+  </article>
+</div>
+<script src="../../assets/visits.js?v=3" defer></script>
+</body>
+</html>
