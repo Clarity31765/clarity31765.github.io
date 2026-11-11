@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI가 혼자 쓴 8D는 6D다 — 이동춘</title>
+<meta name="description" content="8D의 첫 단계는 팀을 모으는 것이고 마지막 단계는 그 팀을 인정하는 것입니다. AI가 혼자 쓰면 D1과 D8이 빠집니다. 공개 연구로 본 단계별 AI 활용 수준.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/ko/notes/8d-ai-6d.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/8d-ai-6d.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/8d-ai-6d.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/8d-ai-6d.html">
+<link rel="icon" href="../../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI가 혼자 쓴 8D는 6D다">
+<meta property="og:description" content="8D의 첫 단계는 팀을 모으는 것이고 마지막 단계는 그 팀을 인정하는 것입니다. AI가 혼자 쓰면 D1과 D8이 빠집니다. 공개 연구로 본 단계별 AI 활용 수준.">
+<meta property="og:url" content="https://clarity31765.github.io/ko/notes/8d-ai-6d.html">
+<style>
+.split{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}
+.split > div{min-width:0;padding:16px 18px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.split h4{margin:0 0 8px;font-size:var(--step-0);color:var(--text)}
+.split ul{margin:0;padding-left:1.1em;font-size:var(--step--1)}
+@media (max-width:720px){.split{grid-template-columns:minmax(0,1fr)}}
+.claim{margin:32px 0;padding:20px 22px;border-left:3px solid var(--plasma);background:var(--panel);border-radius:0 6px 6px 0}
+.claim p{margin:0;font-family:var(--serif);font-size:var(--step-1);color:var(--text)}
+.claim p + p{margin-top:8px;font-family:inherit;font-size:var(--step--1);color:var(--muted)}
+.lv td:nth-child(3){white-space:nowrap}
+.dead{color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">본문으로 건너뛰기</a>
+<div class="topbar"><nav class="lang" aria-label="언어 선택"><a href="../../notes/8d-ai-6d.html" lang="en" hreflang="en">EN</a><a href="8d-ai-6d.html" lang="ko" hreflang="ko" aria-current="true">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">이동춘</a> / <a href="../index.html#writing">글</a></p>
+  <header class="article-head">
+    <h1>AI가 혼자 쓴 8D는 6D다</h1>
+    <p class="dek">8D는 팀을 모으며 시작해 그 팀을 인정하며 끝납니다. AI가 혼자 쓰면 처음과 끝이 빠집니다. 공개된 연구로 확인한, AI가 대신할 수 있는 단계와 없는 단계.</p>
+    <p class="meta">글: 이동춘, <time datetime="2026-11">2026년 11월</time></p>
+  </header>
+  <article id="content" class="prose">
+
+    <p>불량 내용을 넣으면 D0부터 D8까지 채워 주는 AI 8D 작성 도구가 많이 나오고 있습니다. 실제로 써 보면 그럴듯한 보고서가 금방 나옵니다. 그런데 8D가 원래 어떤 구조인지 다시 보면, 이 방식에는 빠지는 단계가 있습니다.</p>
+
+    <div class="claim">
+      <p>AI가 혼자 쓴 8D는 D1과 D8이 빠진 6D다.</p>
+      <p>D1은 팀을 모으는 단계, D8은 그 팀의 기여를 인정하는 단계입니다. 팀이 없으면 둘 다 채울 내용이 없습니다.</p>
+    </div>
+
+    <h2>8D는 팀이 푸는 방법이다</h2>
+    <p>8D(Eight Disciplines)는 포드가 개발해 1987년 Team Oriented Problem Solving(TOPS) 매뉴얼로 발표했고, D0는 1990년대 중반에 추가됐습니다.<sup><a href="#r1">1</a></sup> 이름부터 "팀 지향 문제 해결"입니다. 포드의 G8D 정의에서 D1은 제품·공정 지식을 가진 팀을 꾸리는 것이고, D8은 팀의 주요 기여자를 축하하고 함께 한 노력을 인정하는 것입니다.<sup><a href="#r2">2</a></sup></p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>단계</th><th>내용</th><th>핵심</th></tr></thead>
+    <tbody>
+    <tr><td>D0</td><td>준비, 긴급 대응</td><td>8D가 필요한 문제인지 판단</td></tr>
+    <tr><td><strong>D1</strong></td><td><strong>팀 구성</strong></td><td><strong>제품·공정을 아는 교차 기능 팀</strong></td></tr>
+    <tr><td>D2</td><td>문제 정의</td><td>5W2H, Is/Is-Not으로 측정 가능하게 기술</td></tr>
+    <tr><td>D3</td><td>임시 봉쇄</td><td>원인을 모르는 동안 고객 보호</td></tr>
+    <tr><td>D4</td><td>근본 원인</td><td>발생 원인과 유출 원인을 각각 데이터로 검증</td></tr>
+    <tr><td>D5</td><td>영구 조치 선정</td><td>적용 전 효과·부작용 검증</td></tr>
+    <tr><td>D6</td><td>적용, 유효성 확인</td><td>같은 지표로 효과 확인 후 봉쇄 해제</td></tr>
+    <tr><td>D7</td><td>재발 방지</td><td>FMEA·Control Plan·표준 개정, 수평 전개</td></tr>
+    <tr><td><strong>D8</strong></td><td><strong>팀 인정, 종결</strong></td><td><strong>팀의 기여 인정, 고객 승인</strong></td></tr>
+    </tbody></table></div>
+    <p>8D 교육 자료에는 아예 "팀이 없으면 8D가 아니다(If there's no team, it's not an 8D)"라는 규칙을 첫 번째로 두는 경우도 있습니다.<sup><a href="#r3">3</a></sup> D8을 건너뛰면 사람들이 문제 해결을 벌로 배우게 되고 다음 8D 팀은 사람을 모으기 더 어려워진다는 지적도 있습니다.<sup><a href="#r4">4</a></sup></p>
+
+    <h2>AI는 빈칸을 채운다</h2>
+    <p>공개된 AI 8D 생성 지침 중에는 정보가 없으면 질문하지 말고 합리적으로 추정해 가정으로 표시하라고 하면서, D8은 반드시 마지막 섹션으로 완성하라고 강제하는 것이 있습니다.<sup><a href="#r5">5</a></sup> 그러면 팀이 없어도 D1에는 그럴듯한 팀 명단이, D8에는 그럴듯한 감사 문구가 들어갑니다. 형식은 8D이지만 실질은 6D입니다.</p>
+    <p>더 실질적인 위험은 D4입니다. 8D의 대표적인 실패는 칸을 채우려고 그럴듯한 근본 원인을 적는 것이고,<sup><a href="#r6">6</a></sup> 품질 엔지니어 한 명이 혼자 8D를 쓰면 원인 분석이 불완전하거나 편의적이거나 틀리기 쉽다는 지적이 있습니다.<sup><a href="#r7">7</a></sup> 그럴듯한 문장은 AI가 가장 잘 만드는 것입니다. 8D는 원래 조사를 관리하는 틀이지 원인을 찾는 방법 자체는 아니라서,<sup><a href="#r8">8</a></sup> 양식이 완벽해도 원인은 틀릴 수 있습니다.</p>
+
+    <h2>연구는 어디까지 왔나</h2>
+    <p>AI와 8D를 함께 다룬 연구 두 편을 읽었습니다. 결론은 같습니다. <strong>D0~D8 중 AI가 대체까지 검증된 단계는 없고, 효과가 확인된 것은 모두 사람이 승인하는 보조형입니다.</strong></p>
+    <ul>
+    <li><strong>Adadi 외 (2026)</strong>는 2023~2025년 문헌을 리뷰했는데 최종 47편 중 AI와 8D를 직접 다룬 것은 6편이었습니다. 자동차 조립 라인 사례는 비전 검사 AI였고, 실증된 단계는 D4~D6, 부분 실증은 D3, D1·D2·D7·D8은 문헌 기반 개념뿐이었습니다. 저자들은 AI가 추천하고 최종 권한은 사람에게 있다고 명시합니다.<sup><a href="#r9">9</a></sup></li>
+    <li><strong>Ravi·Gopalakrishnan (2026)</strong>은 단계별 LLM 에이전트에 과거 8D 412건의 지식 그래프를 붙였습니다. 단계마다 필수 승인 게이트를 두고 승인 전에 근거를 직접 쓰게 했으며, AI 가설은 과거 사례와 연결돼야 했습니다. 엔지니어 40명 실험에서 자동차 도장 박리 건의 원인 정확도는 84% 대 61%였습니다. 다만 일부 비교 기준값은 동시 대조군이 아닌 문헌 값입니다. 팀 구성과 결정 책임은 사람에게 남겼습니다.<sup><a href="#r10">10</a></sup></li>
+    </ul>
+    <div class="table-wrap"><table class="lv">
+    <thead><tr><th>단계</th><th>연구에서 AI가 맡은 일</th><th>검증 수준</th><th>판정</th></tr></thead>
+    <tbody>
+    <tr><td>D0</td><td>과거 데이터 분석</td><td>개념</td><td>보조</td></tr>
+    <tr><td>D1</td><td>역량 기반 팀원 추천</td><td>개념</td><td class="dead">대체 불가</td></tr>
+    <tr><td>D2</td><td>Is/Is-Not 문제 기술 초안</td><td>사례 1건</td><td>초안 보조</td></tr>
+    <tr><td>D3</td><td>봉쇄 조치 제안, 비전 선별</td><td>부분 실증</td><td>제안 보조</td></tr>
+    <tr><td>D4</td><td>과거 사례 검색, 가설 순위</td><td>실증</td><td>가설 보조, 확정은 사람</td></tr>
+    <tr><td>D5</td><td>조치 계획 제안</td><td>실증</td><td>제안 보조</td></tr>
+    <tr><td>D6</td><td>모니터링, SPC 보조</td><td>실증</td><td>자동화 여지 가장 큼</td></tr>
+    <tr><td>D7</td><td>유사 사례 검색, 수평 전개</td><td>개념</td><td>검색 보조</td></tr>
+    <tr><td>D8</td><td>보고서 생성</td><td>개념</td><td class="dead">문서만 보조</td></tr>
+    </tbody></table></div>
+    <p>두 연구 모두 자동차와 카드 제조 사례입니다. 반도체 Fab이나 소재 8D에서 검증된 결과는 찾지 못했습니다.</p>
+
+    <h2>소재 품질에서 본 D4</h2>
+    <p>2019년 TSMC Fab 14B에서는 공급사 포토레지스트 한 배치의 특정 성분이 비정상 처리돼 이물질 폴리머가 생겼고, 12/16nm 웨이퍼 수율이 떨어진 뒤에야 드러났습니다. TSMC는 1분기 매출이 약 5.5억 달러 줄 것으로 발표했고, 재발 방지로 인라인 검사와 수입 자재 관리 강화를 밝혔습니다.<sup><a href="#r11">11</a></sup> 공개된 사실만 보면 공급사 출하, Fab 수입, 인라인 검사라는 세 겹의 검출을 모두 통과한 셈입니다.</p>
+    <p>제가 소재 분석을 하며 가장 먼저 의심하는 유출 원인은 시료 대표성과 측정 방식입니다. CoA 시료를 충전 전 탱크에서 뜨면 충전 라인에서 생긴 오염은 분석값에 나오지 않습니다. CMP 슬러리를 크게 희석해 측정하면 스크래치를 내는 큰 입자 구간이 가려집니다.<sup><a href="#r12">12</a></sup> 이런 판단은 과거 사례를 검색해서 나오지 않고, 시료가 어디서 어떻게 왔는지 아는 사람이 회의에 앉아 있어야 나옵니다. D1이 필요한 이유입니다.</p>
+
+    <h2>그래서 AI를 이렇게 쓴다</h2>
+    <div class="split">
+      <div><h4>AI가 할 일</h4><ul><li>D2 문제 기술 초안</li><li>D4 과거 유사 사례 검색, 가설 후보 정리</li><li>D6 모니터링</li><li>D7 수평 전개 대상 검색</li><li>보고서 문서화, 번역</li></ul></div>
+      <div><h4>AI가 검토할 일</h4><ul><li>유출 원인 누락</li><li>"작업자 부주의" 같은 약한 원인</li><li>"재교육"뿐인 시정 조치</li><li>데이터 없는 효과 판정</li></ul></div>
+      <div><h4>사람이 할 일</h4><ul><li>D1 팀 구성</li><li>D4 원인 확정</li><li>단계별 승인과 근거 기록</li><li>D8 팀 인정, 고객 종결</li></ul></div>
+    </div>
+    <p>설계 원칙은 위 두 번째 연구에서 그대로 가져올 수 있습니다. 단계별 승인 게이트, 승인 근거 작성, AI 가설과 근거 데이터의 연결 의무화입니다. 그리고 그 연구의 성과는 과거 8D 412건을 정리한 지식 기반 위에서 나왔습니다. AI를 붙이기 전에 우리 과거 8D가 쓸 수 있는 데이터인지부터 봐야 합니다.</p>
+
+    <h2>이 글의 한계</h2>
+    <ul>
+    <li><strong>연구가 적습니다.</strong> AI와 8D를 직접 다룬 연구는 아직 소수이고, 반도체 사례는 없습니다.</li>
+    <li><strong>회사 자료는 쓰지 않았습니다.</strong> 사례와 수치는 모두 공개 자료입니다.</li>
+    </ul>
+
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">참고문헌</h2><ol>
+    <li id="r1"><a href="https://complianceonline.com/resources/8D-problem-solving-process.html">The 8D Problem Solving Process</a>, ComplianceOnline.</li>
+    <li id="r2"><a href="https://en.wikipedia.org/wiki/Eight_disciplines_problem_solving">Eight disciplines problem solving</a>, Wikipedia.</li>
+    <li id="r3"><a href="https://de.slideshare.net/ataghavi/8d-problem-solving-oshkoshpdf">8D Problem Solving</a>, Oshkosh 교육 자료 (SlideShare).</li>
+    <li id="r4"><a href="https://www.teamguru.com/guides/8d-report">8D report guide</a>, TeamGuru.</li>
+    <li id="r5"><a href="https://skills.sh/robdtaylor/personal-ai-infrastructure/eightd">eightd — 8D report generation skill</a>, skills.sh.</li>
+    <li id="r6"><a href="https://sagnikbhattacharya.com/blog/manufacturer-8d-report-customer-complaint-ai">8D Report With AI: Answer a Customer Complaint Step by Step</a>.</li>
+    <li id="r7"><a href="https://iaec.online/8d-problem-solving-methodology-failure/">8D Problem Solving: When Eight Disciplines Become Eight Empty Form Fields</a>, IAEC.</li>
+    <li id="r8"><a href="https://kepner-tregoe.com/blogs/8d-is-not-a-problem-solving-method/">8D is not a problem solving method?</a>, Kepner-Tregoe.</li>
+    <li id="r9">C. Adadi, H. Jebari, S. Rekiek and N. Sefiani, "An Intelligent 8D Framework for Automotive Quality Control: Integrating AI for System Diagnosis and Corrective Action Optimization", <em>Journal Européen des Systèmes Automatisés</em>, 2026, 59(9), 2437–2453. <a href="https://www.iieta.org/download/file/fid/201387">PDF</a>.</li>
+    <li id="r10">S. Ravi and G. K. Gopalakrishnan, "AI-Augmented 8D Problem Solving: A Design Science Framework for Intelligent Quality Management", <em>11th North American IEOM Conference</em>, 2026. <a href="https://ieomsociety.org/proceedings/milwaukee2026/191.pdf">PDF</a>.</li>
+    <li id="r11"><a href="https://pr.tsmc.com/english/news/1984">TSMC Details Impact of Fab 14B Photoresist Material Incident</a>, TSMC, 2019.</li>
+    <li id="r12"><a href="https://sst.semiconductor-digest.com/?p=31648">CMP slurry particle size distribution</a>, Semiconductor Digest.</li>
+    </ol></section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">전체 글 보기</a></p>
+  </article>
+</div>
+<script src="../../assets/visits.js?v=3" defer></script>
+</body>
+</html>

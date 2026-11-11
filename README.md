@@ -5,6 +5,7 @@
 ```
 index.html                     홈 (소개·경력·툴킷·글·AI 활용)
 notes/au-ta-standards.html     Au·Ta ICP-MS 표준용액 불안정 원인
+notes/8d-ai-6d.html            AI가 혼자 쓴 8D는 6D다 (AI 8D 자동화 검토)
 notes/nelson-rules.html        Nelson Rule 판정 도구 (코드: notes/code/)
 notes/detection-limits-*.html  검출한계 시리즈 3편 (Currie / EPA / SEMI C10)
 notes/detection-limits.html    예전 합본 글 주소 → 시리즈 1편으로 자동 이동
