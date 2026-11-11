@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotelling’s T², from distance to control limit — Oliver Lee</title>
+<meta name="description" content="Why Euclidean distance misses an abnormal combination of two correlated results, how the Mahalanobis distance fixes it, and why Hotelling’s T² uses chi-square, Beta and F limits.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/notes/hotelling-t2.html">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/hotelling-t2.html">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/hotelling-t2.html">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/notes/hotelling-t2.html">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hotelling’s T², from distance to control limit">
+<meta property="og:description" content="Why Euclidean distance misses an abnormal combination of two correlated results, how the Mahalanobis distance fixes it, and why Hotelling’s T² uses chi-square, Beta and F limits.">
+<meta property="og:url" content="https://clarity31765.github.io/notes/hotelling-t2.html">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="topbar"><nav class="lang" aria-label="Language"><a href="hotelling-t2.html" lang="en" hreflang="en" aria-current="true">EN</a><a href="../ko/notes/hotelling-t2.html" lang="ko" hreflang="ko">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../index.html">Oliver Lee</a> / <a href="../index.html#writing">Writing</a></p>
+
+  <header class="article-head">
+    <h1>Hotelling’s T², from distance to control limit</h1>
+    <p class="dek">Two results can each sit inside ±3σ and still be a combination the process never makes. Hotelling’s T² is built to catch exactly that.</p>
+    <p class="meta">By Oliver Lee, <time datetime="2026-11">November 2026</time></p>
+  </header>
+
+  <article id="content" class="prose">
+
+    <h2>The problem</h2>
+    <p>When two quality characteristics move together, for example two impurities that come from the same source, checking each one on its own chart misses something. A result can be normal for variable 1, normal for variable 2, and still be a <strong>combination</strong> that does not happen when the process is healthy. To see it, you need one number that measures how far a point is from the centre <em>of the joint distribution</em>. This note builds that number in three steps.</p>
+
+    <h2>Step 1: Euclidean distance, and why it is not enough</h2>
+    <p>The obvious choice is the straight-line distance from the centre, the hypotenuse of a right triangle:</p>
+    <pre><code>d² = (x₁ − μ₁)² + (x₂ − μ₂)²</code></pre>
+    <p>It has two blind spots:</p>
+    <ol>
+    <li><strong>Scale.</strong> It changes with the units. A variable reported in ppm will outweigh one reported in ppt simply because its numbers are bigger.</li>
+    <li><strong>Correlation.</strong> Every direction counts the same, so the limit is a circle. A point that moves <em>along</em> the usual correlation and a point that moves <em>against</em> it get the same distance.</li>
+    </ol>
+    <p>The second point is the important one. Euclidean distance can tell you how far a point is, but not whether the combination is a normal one.</p>
+
+    <h2>Step 2: Mahalanobis distance</h2>
+    <p>P. C. Mahalanobis proposed this distance in 1936. In matrix form:</p>
+    <pre><code>D² = (x − μ)ᵀ Σ⁻¹ (x − μ)</code></pre>
+    <p>For two variables it is easier to read. First standardize each variable, z<sub>i</sub> = (x<sub>i</sub> − μ<sub>i</sub>) / σ<sub>i</sub>, which removes the scale problem. Then:</p>
+    <pre><code>D² = ( z₁² − 2ρ·z₁·z₂ + z₂² ) / (1 − ρ²)</code></pre>
+    <p>The middle term, <strong>−2ρ·z₁·z₂</strong>, is where the correlation does its work. Take ρ &gt; 0 (the two variables usually rise and fall together):</p>
+    <ul>
+    <li><strong>Same direction</strong> (z₁ and z₂ have the same sign): z₁z₂ &gt; 0, so the term is subtracted and the distance gets <strong>smaller</strong>. This is a combination the process makes all the time.</li>
+    <li><strong>Opposite directions</strong>: z₁z₂ &lt; 0, the minus signs cancel, the term is added and the distance gets <strong>larger</strong>.</li>
+    </ul>
+    <p>The factor 1/(1 − ρ²) makes this stronger as the correlation gets tighter. If the variables are uncorrelated and have unit variance, Σ is the identity matrix and D² is just the Euclidean distance again.</p>
+
+    <div class="table-wrap"><table>
+    <thead><tr><th>Point (ρ = 0.8)</th><th>z₁, z₂</th><th>Euclidean d²</th><th>Mahalanobis D²</th></tr></thead>
+    <tbody>
+    <tr><td>Same direction</td><td>+1, +1</td><td>2</td><td>(1 + 1 − 1.6) / 0.36 = <strong>1.1</strong></td></tr>
+    <tr><td>Opposite directions</td><td>+1, −1</td><td>2</td><td>(1 + 1 + 1.6) / 0.36 = <strong>10.0</strong></td></tr>
+    </tbody></table></div>
+    <p>Same Euclidean distance, a ninefold difference in Mahalanobis distance.</p>
+
+    <h2>Step 3: Hotelling’s T²</h2>
+    <p>In practice μ and Σ are not known, so they are estimated from a baseline: the sample mean vector x̄ and the sample covariance matrix S. Plug those in and you get Hotelling’s T² (Hotelling, 1947):</p>
+    <pre><code>T² = (x − x̄)ᵀ S⁻¹ (x − x̄)</code></pre>
+    <p>So T² is the squared Mahalanobis distance with estimated parameters. For subgroup means of size n, the same expression is multiplied by n.</p>
+    <p>All points with the same T² lie on an ellipse around the centre. The ellipse where T² equals the upper control limit is the familiar “rugby ball”. Its tilt comes from the correlation and its long and short axes from the variance in each direction.</p>
+    <figure><img src="img/t2-ellipse.svg" alt="Correlated data with a circular Euclidean limit, a ±3σ box from two separate charts, and the tilted T² ellipse. Point A along the correlation is inside; point B against it is outside the ellipse only." loading="lazy"></figure>
+    <p>Point B is the case this note is about. It is within ±3σ on both separate charts and inside the Euclidean circle, but its T² is 22.5 against a limit of 11.8. Only the ellipse catches it.</p>
+    <p>The ellipse can only be drawn for two variables. The working chart is a Shewhart-style chart: T² plotted over time against a single upper limit. A lower limit is usually not used, because a squared distance cannot be negative.</p>
+
+    <h2>Setting the upper control limit</h2>
+    <p>The limit depends on what you know, so there are three cases. Here p is the number of variables and m is the number of individual observations in the baseline.</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>Situation</th><th>Distribution</th><th>UCL (individual observations)</th></tr></thead>
+    <tbody>
+    <tr><td>μ and Σ known</td><td>χ²</td><td>χ²<sub>α, p</sub></td></tr>
+    <tr><td><strong>Phase I</strong>: limits from the baseline, applied to the same baseline</td><td>Beta</td><td>((m − 1)² / m) · B<sub>1−α/2; p/2, (m−p−1)/2</sub></td></tr>
+    <tr><td><strong>Phase II</strong>: limits from the baseline, applied to new data</td><td>F</td><td>[p(m + 1)(m − 1) / (m² − mp)] · F<sub>α; p, m−p</sub></td></tr>
+    </tbody></table></div>
+    <p>The Phase I and Phase II forms for individual observations are from Tracy, Young and Mason (1992), as given in the NIST handbook. The NIST Phase I form uses α/2 because it also states a lower limit.</p>
+
+    <h3>Why three different distributions</h3>
+    <p>Think of it as building a ruler and then measuring with it.</p>
+    <ul>
+    <li><strong>χ²: you have the answer key.</strong> The true mean and covariance are known, so the ruler is exact. In a plant this is rare. It is mainly the reference the other two approach.</li>
+    <li><strong>Phase I, Beta: you measure the people who built the ruler.</strong> Each point being tested helped estimate x̄ and S, and pulled them a little toward itself. So it looks less extreme than it really is, and the limit is <strong>tighter</strong>. The purpose is to clean the baseline.</li>
+    <li><strong>Phase II, F: you measure a newcomer with a finished ruler.</strong> The new point played no part in the estimate, but the ruler itself is only an estimate from m points and carries error. The limit is <strong>wider</strong> to allow for that. The (m + 1) term does this.</li>
+    </ul>
+    <figure><img src="img/t2-limits.svg" alt="UCL against baseline size m for p = 2: the Phase II F limit starts high, the Phase I Beta limit starts low, and both approach the chi-square value 11.83." loading="lazy"></figure>
+    <div class="table-wrap"><table>
+    <thead><tr><th>m</th><th>Phase I (Beta)</th><th>χ²</th><th>Phase II (F)</th></tr></thead>
+    <tbody>
+    <tr><td>20</td><td>9.05</td><td>11.83</td><td>18.54</td></tr>
+    <tr><td>50</td><td>10.68</td><td>11.83</td><td>13.97</td></tr>
+    <tr><td>200</td><td>11.54</td><td>11.83</td><td>12.31</td></tr>
+    </tbody></table></div>
+    <p>p = 2, α = 0.0027 (the 3σ equivalent). For a like-for-like comparison, the Phase I values here use the one-sided 1 − α quantile. With a small baseline the three limits are far apart. As m grows, the estimate approaches the truth and all three converge on the χ² value.</p>
+
+    <h2>Things to watch in practice</h2>
+    <ul>
+    <li><strong>A signal does not say which variable.</strong> T² is one number. To find the cause, decompose it, for example with the Mason–Tracy–Young (MYT) decomposition, which splits T² into a term for each variable plus conditional terms.</li>
+    <li><strong>Do not use T² for everything.</strong> If a shift affects only one variable, that variable’s own chart is usually faster and easier to read. Keep the univariate charts alongside.</li>
+    <li><strong>Redundant variables break it.</strong> If two variables are perfectly correlated, or one is the sum of others, S cannot be inverted. Remove the redundant variable.</li>
+    <li><strong>It assumes multivariate normality.</strong> Trace results near the detection limit are often skewed or censored. Check the distribution, and consider a log transform, before trusting the limits.</li>
+    </ul>
+
+    <h2>Practical takeaways</h2>
+    <ol>
+    <li><strong>Euclidean distance measures how far. Mahalanobis distance also asks whether the combination is normal.</strong></li>
+    <li><strong>T² is the squared Mahalanobis distance with estimated mean and covariance.</strong></li>
+    <li><strong>Answer key: χ². Same data: Beta, tighter. New data: F, wider.</strong> With a large baseline, all three meet.</li>
+    </ol>
+
+    <h2>How this note was made</h2>
+    <p>I worked through the topic in conversations with AI assistants (ChatGPT, then Claude). I then checked each formula against the NIST/SEMATECH e-Handbook and the papers below, and computed every number in the tables and figures in Python (SciPy). The data in the figure are simulated.</p>
+
+    <section class="refs" aria-labelledby="refs-h"><h2 id="refs-h">References</h2><ol>
+    <li>P. C. Mahalanobis, "On the generalised distance in statistics", <em>Proceedings of the National Institute of Sciences of India</em>, 1936, 2(1), 49–55.</li>
+    <li>H. Hotelling, 1947, as cited in NIST, <a href="https://itl.nist.gov/div898/handbook/pmc/section3/pmc341.htm">Hotelling control charts (6.3.4.1)</a>.</li>
+    <li>N. D. Tracy, J. C. Young, R. L. Mason, "Multivariate Control Charts for Individual Observations", <em>Journal of Quality Technology</em>, 1992, 24(2), 88–95. <a href="https://doi.org/10.1080/00224065.1992.12015232">doi:10.1080/00224065.1992.12015232</a></li>
+    <li>R. L. Mason, N. D. Tracy, J. C. Young, "Decomposition of T² for Multivariate Control Chart Interpretation", <em>Journal of Quality Technology</em>, 1995, 27(2), 99–108. <a href="https://doi.org/10.1080/00224065.1995.11979573">doi:10.1080/00224065.1995.11979573</a></li>
+    <li>NIST/SEMATECH e-Handbook, <a href="https://itl.nist.gov/div898/handbook/pmc/section5/pmc5433.htm">Chart for individual observations, Phase I (6.5.4.3.3)</a> and <a href="https://itl.nist.gov/div898/handbook/pmc/section5/pmc5434.htm">Phase II (6.5.4.3.4)</a>.</li>
+    <li>JMP Help, <a href="https://jmp.com/support/help/14/statistical-details-for-individual-observations.shtml">Statistical details for individual observations</a>.</li>
+    </ol></section>
+
+    <p style="margin-top:48px"><a href="../index.html#writing">Back to all writing</a></p>
+  </article>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>
