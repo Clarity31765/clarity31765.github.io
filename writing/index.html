@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing &amp; AI in the lab — Oliver Lee</title>
+<meta name="description" content="Notes on analytical methods and quality by Oliver Lee, and how AI is used in the lab with every claim checked against the source.">
+<meta name="theme-color" content="#0a0f17">
+<link rel="canonical" href="https://clarity31765.github.io/writing/">
+<link rel="alternate" hreflang="en" href="https://clarity31765.github.io/writing/">
+<link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/writing/">
+<link rel="alternate" hreflang="x-default" href="https://clarity31765.github.io/writing/">
+<link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="../assets/style.css?v=5">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Writing &amp; AI in the lab">
+<meta property="og:description" content="Notes on analytical methods and quality by Oliver Lee, and how AI is used in the lab with every claim checked against the source.">
+<meta property="og:url" content="https://clarity31765.github.io/writing/">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="topbar"><nav class="lang" aria-label="Language"><a href="./" lang="en" hreflang="en" aria-current="true">EN</a><a href="../ko/writing/" lang="ko" hreflang="ko">한국어</a></nav></div>
+
+<div class="article-shell">
+  <p class="crumb"><a href="../">Oliver Lee</a></p>
+
+  <header class="article-head">
+    <h1>Writing &amp; AI in the lab</h1>
+    <p class="dek">Notes on analytical methods and quality, and how I use AI in the lab with every claim checked against the source.</p>
+  </header>
+
+  <main id="content" class="content" style="padding-top:0">
+<!-- Generated from index.html (sections #writing and #ai) by tools/make_writing.py. Edit the main page, then regenerate. -->
+    <section id="writing" class="block" aria-labelledby="writing-h">
+      <h2 id="writing-h">Writing</h2>
+      <ul class="posts">
+        <li>
+          <a href="../notes/hotelling-t2.html">
+            <time datetime="2026-11">Nov 2026</time>
+            <span><span class="title">Hotelling’s T², from distance to control limit</span><span class="sum">Two results can each pass ±3σ and still be a combination the process never makes. Euclidean vs Mahalanobis distance, the T² ellipse, and why the limits use χ², Beta and F.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/8d-ai-6d.html">
+            <time datetime="2026-11">Nov 2026</time>
+            <span><span class="title">An 8D written by AI alone is a 6D</span><span class="sum">8D starts by forming a team and ends by recognizing it. An AI writing alone drops both. What published studies show AI can take over, step by step.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/nelson-rules-ai.html">
+            <time datetime="2026-11">Nov 2026</time>
+            <span><span class="title">Two readings of the same control chart</span><span class="sum">Run all eight Nelson rules and the shift shows up 24 days before a 3σ limit would catch it. AI sorts the extra alarms and sends the early warning. One chart per rule.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/au-ta-standards.html">
+            <time datetime="2026-10">Oct 2026</time>
+            <span><span class="title">Why Au and Ta ICP-MS standards go bad in about a week</span><span class="sum">Gold sticks to the bottle, tantalum needs fluoride, and together they raise the background at m/z 197. Causes from the literature and what to change.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/nelson-rules.html">
+            <time datetime="2026-10">Oct 2026</time>
+            <span><span class="title">A Nelson rules checker for QC control charts</span><span class="sum">A small, tested Python tool that flags all eight Nelson rules on daily QC data, so slow shifts and drifts are caught early.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/detection-limits-currie.html">
+            <time datetime="2026-10">Oct 2026</time>
+            <span><span class="title">Detection limits, part 1: Currie and the three limits</span><span class="sum">The critical level, the detection limit and the determination limit, and why “detected” is not the same as “detectable”.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/detection-limits-epa.html">
+            <time datetime="2026-10">Oct 2026</time>
+            <span><span class="title">Detection limits, part 2: the EPA MDL</span><span class="sum">From the 1981 paper to the 2017 revision, with a worked example of why the blank-based MDL can be five times higher.</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="../notes/detection-limits-semi-c10.html">
+            <time datetime="2026-10">Oct 2026</time>
+            <span><span class="title">Detection limits, part 3: SEMI C10</span><span class="sum">The multi-level, weighted idea behind the semiconductor MDL guide, explained at concept level.</span></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="ai" class="block" aria-labelledby="ai-h">
+      <h2 id="ai-h">AI in the lab</h2>
+      <div class="log">
+        <article>
+          <h3>Literature review, checked against the source</h3>
+          <p>Used Claude to collect supplier notes and papers on why low-level Au and Ta standards degrade, then read each original page and checked every number against it.</p>
+          <dl>
+            <dt>AI step</dt><dd>Search, collect and draft the summary</dd>
+            <dt>Human step</dt><dd>Every figure traced to its source; one reference that could not be traced was removed</dd>
+            <dt>Result</dt><dd><a href="../notes/au-ta-standards.html">Au and Ta standards note</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>A small QC tool, written with AI and tested by hand</h3>
+          <p>Used Claude to draft a Python checker for the eight Nelson rules, then wrote one hand-made test per rule, including cases that must not trigger.</p>
+          <dl>
+            <dt>AI step</dt><dd>Draft the code and the synthetic data</dd>
+            <dt>Human step</dt><dd>Rules checked against published definitions; 8 tests, all passing</dd>
+            <dt>Result</dt><dd><a href="../notes/nelson-rules.html">Nelson rules checker</a></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>Fact-checking a three-part series</h3>
+          <p>Used Claude to check a detection-limit series against primary sources: the Code of Federal Regulations, the Federal Register, NIST and SEMI.</p>
+          <dl>
+            <dt>AI step</dt><dd>Find and read the primary sources</dd>
+            <dt>Human step</dt><dd>Three corrections kept in the notes: the author’s name (Currie), two official years for the first EPA procedure, and a 2004 withdrawal that sits between the 2000 settlement and the 2017 revision</dd>
+            <dt>Result</dt><dd><a href="../notes/detection-limits-currie.html">Detection limits series</a></dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <p style="margin-top:48px"><a href="../">Back to the main page</a></p>
+  </main>
+</div>
+<script src="../assets/visits.js?v=3" defer></script>
+</body>
+</html>
