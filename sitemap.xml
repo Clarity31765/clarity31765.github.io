@@ -90,4 +90,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/notes/hotelling-t2.html"/>
     <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/notes/hotelling-t2.html"/>
   </url>
+  <url>
+    <loc>https://clarity31765.github.io/writing/</loc><lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/writing/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/writing/"/>
+  </url>
+  <url>
+    <loc>https://clarity31765.github.io/ko/writing/</loc><lastmod>2026-11-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clarity31765.github.io/writing/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clarity31765.github.io/ko/writing/"/>
+  </url>
 </urlset>
